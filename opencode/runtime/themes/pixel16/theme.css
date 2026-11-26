@@ -1,0 +1,140 @@
+/* ==========================================================================
+ * Pixel 16-bit — OpenCode Harness theme
+ * Injected after OpenCode's own stylesheet; overrides the design tokens that
+ * the desktop renderer actually consumes (legacy v1 + v2 token sets).
+ * Variables provided by Harness:
+ *   --hx-bg --hx-fg --hx-accent --hx-px --hx-font-uiFont --hx-font-codeFont
+ * ======================================================================== */
+:root,
+:root[data-color-scheme='dark'],
+:root[data-color-scheme='light'] {
+  color-scheme: dark;
+
+  --background-base: var(--hx-bg) !important;
+  --background-weak: color-mix(in srgb, var(--hx-bg) 88%, var(--hx-fg)) !important;
+  --background-strong: color-mix(in srgb, var(--hx-bg) 94%, var(--hx-fg)) !important;
+  --background-stronger: color-mix(in srgb, var(--hx-bg) 90%, var(--hx-fg)) !important;
+
+  --surface-base: color-mix(in srgb, var(--hx-bg) 92%, var(--hx-fg)) !important;
+  --surface-base-hover: color-mix(in srgb, var(--hx-bg) 85%, var(--hx-fg)) !important;
+  --surface-base-active: color-mix(in srgb, var(--hx-bg) 80%, var(--hx-fg)) !important;
+  --surface-raised-base: color-mix(in srgb, var(--hx-bg) 90%, var(--hx-fg)) !important;
+  --surface-raised-strong: color-mix(in srgb, var(--hx-bg) 86%, var(--hx-fg)) !important;
+  --surface-float-base: color-mix(in srgb, var(--hx-bg) 94%, var(--hx-fg)) !important;
+  --surface-weak: color-mix(in srgb, var(--hx-bg) 84%, var(--hx-fg)) !important;
+  --surface-strong: color-mix(in srgb, var(--hx-bg) 78%, var(--hx-fg)) !important;
+
+  --input-base: color-mix(in srgb, var(--hx-bg) 94%, var(--hx-fg)) !important;
+  --input-hover: color-mix(in srgb, var(--hx-bg) 88%, var(--hx-fg)) !important;
+  --input-active: color-mix(in srgb, var(--hx-bg) 90%, var(--hx-fg)) !important;
+  --input-focus: color-mix(in srgb, var(--hx-bg) 90%, var(--hx-fg)) !important;
+  --input-selected: color-mix(in srgb, var(--hx-accent) 22%, var(--hx-bg)) !important;
+  --input-disabled: color-mix(in srgb, var(--hx-bg) 80%, var(--hx-fg)) !important;
+
+  --text-base: color-mix(in srgb, var(--hx-fg) 82%, var(--hx-bg)) !important;
+  --text-weak: color-mix(in srgb, var(--hx-fg) 62%, var(--hx-bg)) !important;
+  --text-weaker: color-mix(in srgb, var(--hx-fg) 42%, var(--hx-bg)) !important;
+  --text-strong: var(--hx-fg) !important;
+  --text-stronger: var(--hx-fg) !important;
+  --text-interactive-base: var(--hx-accent) !important;
+
+  --border-base: color-mix(in srgb, var(--hx-fg) 34%, var(--hx-bg)) !important;
+  --border-weak-base: color-mix(in srgb, var(--hx-fg) 22%, var(--hx-bg)) !important;
+  --border-weaker-base: color-mix(in srgb, var(--hx-fg) 14%, var(--hx-bg)) !important;
+  --border-strong-base: color-mix(in srgb, var(--hx-fg) 52%, var(--hx-bg)) !important;
+  --border-hover: var(--hx-accent) !important;
+  --border-selected: var(--hx-accent) !important;
+  --border-focus: var(--hx-accent) !important;
+
+  --icon-base: color-mix(in srgb, var(--hx-fg) 70%, var(--hx-bg)) !important;
+  --icon-strong-base: var(--hx-fg) !important;
+  --icon-interactive-base: var(--hx-accent) !important;
+  --icon-on-brand-base: var(--hx-bg) !important;
+
+  --button-primary-base: var(--hx-accent) !important;
+  --button-secondary-base: color-mix(in srgb, var(--hx-bg) 86%, var(--hx-fg)) !important;
+  --surface-brand-base: var(--hx-accent) !important;
+  --text-on-brand-base: var(--hx-bg) !important;
+  --text-on-brand-strong: var(--hx-bg) !important;
+
+  /* v2 tokens */
+  --v2-background-bg-base: var(--hx-bg) !important;
+  --v2-background-bg-deep: color-mix(in srgb, var(--hx-bg) 88%, var(--hx-fg)) !important;
+  --v2-background-bg-layer-01: color-mix(in srgb, var(--hx-bg) 92%, var(--hx-fg)) !important;
+  --v2-background-bg-layer-02: color-mix(in srgb, var(--hx-bg) 86%, var(--hx-fg)) !important;
+  --v2-background-bg-layer-03: color-mix(in srgb, var(--hx-bg) 80%, var(--hx-fg)) !important;
+  --v2-background-bg-accent: var(--hx-accent) !important;
+  --v2-text-text-base: var(--hx-fg) !important;
+  --v2-text-text-muted: color-mix(in srgb, var(--hx-fg) 66%, var(--hx-bg)) !important;
+  --v2-text-text-faint: color-mix(in srgb, var(--hx-fg) 46%, var(--hx-bg)) !important;
+  --v2-text-text-accent: var(--hx-accent) !important;
+  --v2-border-border-base: color-mix(in srgb, var(--hx-fg) 30%, var(--hx-bg)) !important;
+  --v2-border-border-muted: color-mix(in srgb, var(--hx-fg) 18%, var(--hx-bg)) !important;
+  --v2-border-border-focus: var(--hx-accent) !important;
+  --v2-icon-icon-base: color-mix(in srgb, var(--hx-fg) 72%, var(--hx-bg)) !important;
+  --v2-icon-icon-muted: color-mix(in srgb, var(--hx-fg) 52%, var(--hx-bg)) !important;
+
+  --font-family-sans: var(--hx-font-uiFont), ui-sans-serif, system-ui, sans-serif !important;
+  --font-family-mono: var(--hx-font-codeFont), ui-monospace, monospace !important;
+  --v2-font-family-sans: var(--font-family-sans) !important;
+  --v2-font-family-code: var(--font-family-mono) !important;
+
+  --radius-xs: 0px !important;
+  --radius-sm: 0px !important;
+  --radius-md: 0px !important;
+  --radius-lg: 0px !important;
+  --radius-xl: 0px !important;
+  --radius-2xl: 0px !important;
+  --radius-3xl: 0px !important;
+  --radius-full: 0px !important;
+}
+
+html,
+body {
+  background-color: var(--hx-bg) !important;
+  color: var(--hx-fg) !important;
+  font-family: var(--font-family-sans) !important;
+  -webkit-font-smoothing: none;
+  text-rendering: optimizeSpeed;
+}
+
+code, pre, kbd, samp, .font-mono {
+  font-family: var(--font-family-mono) !important;
+}
+
+/* Hard pixel edges on the interactive chrome */
+button, input, textarea, select, [role='button'], [role='tab'], [role='menuitem'],
+[data-component='button-v2'], [data-component='text-input-v2'], [data-slot='input-wrapper'],
+[data-component='menu-v2-content'], [data-component='dialog-v2'], [data-component='dialog-container'] {
+  border-radius: 0 !important;
+}
+
+[data-slot='sidebar-header'], [data-slot='header'], [data-component='menu-v2-content'],
+[data-component='dialog-v2'], [data-component='dialog-container'], [data-slot='input-wrapper'] {
+  box-shadow: calc(var(--hx-px) * 2) calc(var(--hx-px) * 2) 0 0 color-mix(in srgb, var(--hx-bg) 55%, #000) !important;
+}
+
+::selection {
+  background: var(--hx-accent) !important;
+  color: var(--hx-bg) !important;
+}
+
+/* Scanline / dither texture. Sits above the UI, below the pet stage. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.16) 0px,
+    rgba(0, 0, 0, 0.16) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
+
+:root[data-hx-anim='off'] body::after { display: none; }

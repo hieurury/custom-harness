@@ -1,0 +1,882 @@
+/* Antigravity Pet Runtime Styles - Ultimate Top-Tier Z-Index (Just below OS/Mouse cursor) */
+#hx-pet-stage {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2147483600 !important;
+  overflow: visible;
+}
+
+.hx-pet {
+  position: absolute;
+  pointer-events: auto;
+  user-select: none;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform, left, top;
+  z-index: 2147483610;
+}
+
+.hx-pet.is-dragged {
+  cursor: grabbing !important;
+  z-index: 2147483640 !important;
+}
+
+.hx-pet-sprite {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transform-origin: bottom center;
+  transition: transform 0.1s ease-out;
+}
+
+.hx-pet-shadow {
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.hx-pet.is-flying .hx-pet-shadow {
+  opacity: 0.2;
+  transform: translateX(-50%) scale(0.6);
+}
+
+.hx-pet.is-dragged .hx-pet-shadow {
+  opacity: 0.1;
+  transform: translateX(-50%) scale(0.4);
+}
+
+/* Retro Pixel Dialogue Bubble (Smart Adaptive & Anti-Clipping) */
+.hx-pet-bubble {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  --bubble-shift-x: 0px;
+  --arrow-shift-x: 0px;
+  transform: translateX(calc(-50% + var(--bubble-shift-x))) translateY(-4px) scale(0.95);
+  background: #14161e;
+  color: #f0f2f5;
+  border: 1.5px solid #ff9d00;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-family: "HX-vt323", "JetBrains Mono", monospace;
+  letter-spacing: 0.2px;
+  line-height: 1.35;
+  width: max-content;
+  white-space: normal;
+  word-break: break-word;
+  max-width: min(260px, calc(100vw - 32px));
+  min-width: 60px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 6px rgba(255, 157, 0, 0.3);
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  z-index: 2147483642 !important;
+}
+
+/* Arrow default: points DOWN towards pet below */
+.hx-pet-bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(calc(-50% + var(--arrow-shift-x)));
+  border-width: 5px 5px 0 5px;
+  border-style: solid;
+  border-color: #ff9d00 transparent transparent transparent;
+}
+
+.hx-pet-bubble.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(calc(-50% + var(--bubble-shift-x))) translateY(-10px) scale(1);
+}
+
+/* When flipped to bottom (pet near top screen edge) */
+.hx-pet-bubble.is-flipped-bottom {
+  bottom: auto;
+  top: 100%;
+  transform: translateX(calc(-50% + var(--bubble-shift-x))) translateY(4px) scale(0.95);
+}
+
+.hx-pet-bubble.is-flipped-bottom::after {
+  top: auto;
+  bottom: 100%;
+  border-width: 0 5px 5px 5px;
+  border-style: solid;
+  border-color: transparent transparent #ff9d00 transparent;
+}
+
+.hx-pet-bubble.is-flipped-bottom.is-visible {
+  transform: translateX(calc(-50% + var(--bubble-shift-x))) translateY(10px) scale(1);
+}
+
+.hx-pet-bubble.is-measuring {
+  position: absolute !important;
+  visibility: hidden !important;
+  display: block !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* -------------------------------------------------------------
+ * Modern Organic Playground & Interaction Styles (100% SVG, No Emoji)
+ * ------------------------------------------------------------- */
+
+/* Menu Backdrop */
+.hx-pet-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483620 !important;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  animation: hxBackdropFade 0.12s ease-out;
+  pointer-events: auto;
+}
+
+/* Elevate Pet above backdrop when personal orbit menu is open */
+.hx-pet.is-in-orbit-menu {
+  z-index: 2147483635 !important;
+}
+
+@keyframes hxBackdropFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* -------------------------------------------------------------
+ * Tactile Platform Impact & Collision Reactions
+ * ------------------------------------------------------------- */
+.hx-platform-landed {
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease-out !important;
+  transform: translateY(1.5px) scale(0.985) !important;
+  box-shadow: 0 0 10px rgba(var(--hx-accent-rgb, 245, 158, 11), 0.3) !important;
+}
+
+@keyframes hxPlatformPeck {
+  0% { transform: scale(1); }
+  35% { transform: scale(0.975) translateY(1.5px); }
+  70% { transform: scale(0.99) translateY(-0.5px); }
+  100% { transform: scale(1); }
+}
+
+.hx-platform-pecked {
+  animation: hxPlatformPeck 0.32s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* -------------------------------------------------------------
+ * 1. Pure Circular Universal Frosted White Glass Radial Menu
+ * ------------------------------------------------------------- */
+.hx-radial-menu {
+  position: fixed;
+  width: 270px;
+  height: 270px;
+  transform: translate(-50%, -50%);
+  z-index: 2147483630 !important;
+  user-select: none;
+  pointer-events: auto !important;
+  opacity: 1;
+  animation: hxRadialPop 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 50%;
+  overflow: hidden;
+  clip-path: circle(50% at 50% 50%);
+  -webkit-clip-path: circle(50% at 50% 50%);
+  backdrop-filter: blur(32px) saturate(180%) contrast(100%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%) contrast(100%);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+  border: none;
+}
+
+@keyframes hxRadialPop {
+  from { opacity: 0.7; transform: translate(-50%, -50%) scale(0.88); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.hx-radial-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.5));
+}
+
+.hx-radial-bg-circle {
+  fill: rgba(255, 255, 255, 0.04);
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 1.2px;
+}
+
+.hx-radial-rim-circle {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1px;
+}
+
+.hx-sector-group {
+  cursor: pointer;
+  pointer-events: auto !important;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hx-sector-path {
+  fill: rgba(255, 255, 255, 0.02);
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 1px;
+  pointer-events: auto !important;
+  transition: fill 0.18s, stroke 0.18s, stroke-width 0.18s, filter 0.18s;
+}
+
+.hx-sector-group:hover .hx-sector-path {
+  fill: rgba(255, 255, 255, 0.18);
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+}
+
+.hx-sector-content {
+  pointer-events: none;
+}
+
+.hx-sector-icon {
+  color: #ffffff;
+  transition: color 0.18s, transform 0.18s, filter 0.18s;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+
+.hx-sector-group:hover .hx-sector-icon {
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+}
+
+.hx-sector-icon svg {
+  stroke: currentColor;
+  fill: none;
+}
+
+.hx-sector-label {
+  fill: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-anchor: middle;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
+  transition: fill 0.18s, font-weight 0.18s;
+}
+
+.hx-sector-group:hover .hx-sector-label {
+  fill: #ffffff;
+  font-weight: 700;
+}
+
+.hx-center-ring {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.20);
+  stroke-width: 1px;
+}
+
+.hx-center-circle {
+  fill: rgba(255, 255, 255, 0.10);
+  stroke: rgba(255, 255, 255, 0.28);
+  stroke-width: 1.2px;
+  pointer-events: auto !important;
+  transition: fill 0.18s, stroke 0.18s, filter 0.18s;
+  cursor: pointer;
+}
+
+.hx-center-btn {
+  cursor: pointer;
+  pointer-events: auto !important;
+}
+
+.hx-center-btn:hover .hx-center-circle {
+  fill: rgba(255, 255, 255, 0.25);
+  stroke: rgba(255, 255, 255, 0.65);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.45));
+}
+
+.hx-center-title {
+  fill: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: middle;
+  letter-spacing: 0.5px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
+  transition: fill 0.18s;
+  pointer-events: none;
+}
+
+.hx-center-btn:hover .hx-center-title {
+  fill: #ffffff;
+}
+
+.hx-center-sub {
+  fill: rgba(255, 255, 255, 0.75);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 8px;
+  font-weight: 500;
+  text-anchor: middle;
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  transition: fill 0.18s, fill-opacity 0.18s;
+}
+
+.hx-center-btn:hover .hx-center-sub {
+  fill: #ffffff;
+  fill-opacity: 1;
+}
+
+.hx-center-icon {
+  color: #ffffff;
+  transition: color 0.18s;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
+}
+
+/* Cursor-Held Item Floating HUD - Frosted White Glass */
+.hx-held-hud {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 24, 34, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  padding: 6px 20px;
+  color: #ffffff;
+  font-size: 11.5px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483645 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: hxHudSlide 0.2s ease-out;
+}
+
+@keyframes hxHudSlide {
+  from { opacity: 0; transform: translate(-50%, -15px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* -------------------------------------------------------------
+ * 2. Pet Personal Action Arc Menu (Adaptive Circular Arc Near Pet)
+ * ------------------------------------------------------------- */
+.hx-pet-action-orbit {
+  position: fixed;
+  width: 0;
+  height: 0;
+  z-index: 2147483630 !important;
+  user-select: none;
+  pointer-events: none;
+}
+
+.hx-pet-orbit-svg {
+  position: absolute;
+  left: -70px;
+  top: -70px;
+  width: 140px;
+  height: 140px;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.hx-pet-orbit-ring {
+  fill: none;
+  stroke: #d97706;
+  stroke-width: 1.2px;
+  stroke-dasharray: 3 3;
+  opacity: 0.55;
+}
+
+/* Orbit Item: position anchor for compact 28px circular button + sibling tooltip */
+.hx-pet-orbit-item {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  z-index: 2147483631 !important;
+}
+
+.hx-pet-orbit-item:hover {
+  z-index: 2147483635 !important;
+}
+
+/* Button: Compact 28px pure circle, perfectly centered icon */
+.hx-pet-orbit-btn {
+  position: absolute;
+  inset: 0;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 50% !important;
+  clip-path: circle(50% at 50% 50%) !important;
+  -webkit-clip-path: circle(50% at 50% 50%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 0 !important;
+  border: 1.5px solid #d97706 !important;
+  background: #1a110a !important; /* Crisp solid background, ZERO blur */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.75), 0 0 8px rgba(217, 119, 6, 0.35);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transform: scale(1);
+  transition: transform 0.15s ease-out, background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.hx-pet-orbit-btn:hover {
+  transform: scale(1.12);
+  background: #2b180d !important;
+  border-color: #fbbf24 !important;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.85), 0 0 14px rgba(251, 191, 36, 0.75);
+}
+
+.hx-pet-orbit-btn:active {
+  transform: scale(0.92);
+}
+
+.hx-pet-btn-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 14px !important;
+  height: 14px !important;
+  margin: auto !important;
+  color: #fbbf24;
+  pointer-events: none;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.hx-pet-orbit-btn:hover .hx-pet-btn-icon {
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+.hx-pet-btn-icon svg {
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  margin: 0 !important;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Tooltip: Compact badge, sibling of button, completely unclipped */
+.hx-pet-btn-tooltip {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  background: #1a110a; /* Crisp solid background, ZERO blur */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #fbbf24;
+  border-radius: 5px !important;
+  padding: 4px 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.9), 0 0 10px rgba(217, 119, 6, 0.5);
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  z-index: 2147483638 !important;
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+/* Reveal tooltip when hovering over orbit item */
+.hx-pet-orbit-item:hover .hx-pet-btn-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Tooltip position variants */
+.hx-pet-btn-tooltip.pos-top {
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+}
+.hx-pet-orbit-item:hover .hx-pet-btn-tooltip.pos-top {
+  transform: translateX(-50%) translateY(0);
+}
+
+.hx-pet-btn-tooltip.pos-bottom {
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+}
+.hx-pet-orbit-item:hover .hx-pet-btn-tooltip.pos-bottom {
+  transform: translateX(-50%) translateY(0);
+}
+
+.hx-pet-btn-tooltip.pos-left {
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%) translateX(4px);
+}
+.hx-pet-orbit-item:hover .hx-pet-btn-tooltip.pos-left {
+  transform: translateY(-50%) translateX(0);
+}
+
+.hx-pet-btn-tooltip.pos-right {
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+}
+.hx-pet-orbit-item:hover .hx-pet-btn-tooltip.pos-right {
+  transform: translateY(-50%) translateX(0);
+}
+
+.hx-tooltip-title {
+  color: #fbbf24;
+  font-family: "HX-vt323", "JetBrains Mono", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+
+.hx-tooltip-sub {
+  color: #fef3c7;
+  font-family: "HX-vt323", "JetBrains Mono", monospace;
+  font-size: 10px;
+  opacity: 0.85;
+  letter-spacing: 0.3px;
+  line-height: 1.1;
+}
+
+/* Theme: Owl Customizations */
+.hx-pet-theme-owl .hx-pet-orbit-btn {
+  background: #1a110a;
+  border-color: #d97706;
+}
+
+/* Generic Fallback Pet Theme (Crisp Solid Slate) */
+.hx-pet-theme-generic .hx-pet-orbit-ring {
+  stroke: rgba(255, 255, 255, 0.4);
+}
+
+.hx-pet-theme-generic .hx-pet-orbit-btn {
+  background: #0f172a;
+  border: 1.8px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.hx-pet-theme-generic .hx-pet-btn-icon {
+  color: #38bdf8;
+}
+
+.hx-pet-theme-generic .hx-pet-orbit-btn:hover {
+  background: #1e293b;
+  border-color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7), 0 0 14px rgba(56, 189, 248, 0.5);
+}
+
+.hx-pet-theme-generic .hx-pet-btn-tooltip {
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.hx-pet-theme-generic .hx-tooltip-title {
+  color: #38bdf8;
+  font-family: system-ui, sans-serif;
+  font-size: 11.5px;
+}
+
+.hx-pet-theme-generic .hx-tooltip-sub {
+  color: #e2e8f0;
+  font-family: system-ui, sans-serif;
+  font-size: 9.5px;
+}
+
+/* 3. Physical World Food & Creatures */
+.hx-world-food {
+  position: fixed;
+  z-index: 2147483615 !important;
+  pointer-events: auto;
+  user-select: none;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform, opacity;
+  transition: opacity 0.4s ease-out;
+}
+
+.hx-world-food.is-dragging {
+  cursor: grabbing !important;
+  z-index: 2147483640 !important;
+}
+
+.hx-world-food.is-held {
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  filter: drop-shadow(0 0 10px rgba(255, 157, 0, 0.6));
+}
+
+.hx-food-token {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1c2130;
+  border: 1.5px solid #ff9d00;
+  border-radius: 999px;
+  padding: 4px 10px;
+  color: #f1f5f9;
+  font-size: 11px;
+  font-family: "HX-vt323", "JetBrains Mono", monospace;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 157, 0, 0.25);
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.hx-world-food:hover .hx-food-token {
+  border-color: #ffb833;
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6), 0 0 12px rgba(255, 157, 0, 0.4);
+}
+
+.hx-food-icon {
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hx-food-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hx-food-shadow {
+  width: 26px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  margin: 2px auto 0;
+  pointer-events: none;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.hx-world-food.is-dragging .hx-food-shadow {
+  transform: scale(0.5);
+  opacity: 0.15;
+}
+
+/* -------------------------------------------------------------
+ * 20x20 (Compact Scale) Pixel Art Living Creatures & Foods
+ * ------------------------------------------------------------- */
+.hx-world-creature,
+.hx-world-food {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  z-index: 2147483615 !important;
+  pointer-events: auto;
+  user-select: none;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform, opacity;
+  transition: opacity 0.4s ease-out;
+}
+
+.hx-world-creature.is-dragging,
+.hx-world-food.is-dragging {
+  cursor: grabbing !important;
+  z-index: 2147483640 !important;
+}
+
+.hx-world-creature.is-held,
+.hx-world-food.is-held {
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  filter: drop-shadow(0 0 8px var(--hx-accent, #38bdf8));
+}
+
+.hx-creature-sprite,
+.hx-food-sprite {
+  width: 20px;
+  height: 20px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  background-repeat: no-repeat;
+  background-size: 80px 20px;
+  transform-origin: center bottom;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+}
+
+.hx-food-sprite {
+  background-size: 20px 20px;
+}
+
+.hx-creature-bug .hx-creature-sprite {
+  animation: hxBugCrawl 0.65s steps(4) infinite;
+}
+
+@keyframes hxBugCrawl {
+  from { background-position: 0px 0px; }
+  to { background-position: -80px 0px; }
+}
+
+.hx-creature-beetle .hx-creature-sprite {
+  animation: hxBeetleFlutter 0.32s steps(4) infinite;
+}
+
+@keyframes hxBeetleFlutter {
+  from { background-position: 0px 0px; }
+  to { background-position: -80px 0px; }
+}
+
+.hx-creature-fish .hx-creature-sprite {
+  animation: hxFishSwim 0.5s steps(4) infinite;
+}
+
+@keyframes hxFishSwim {
+  from { background-position: 0px 0px; }
+  to { background-position: -80px 0px; }
+}
+
+.hx-creature-shadow,
+.hx-food-shadow {
+  width: 16px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  margin: 1px auto 0;
+  pointer-events: none;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.hx-world-creature.is-dragging .hx-creature-shadow,
+.hx-world-food.is-dragging .hx-food-shadow {
+  transform: scale(0.5);
+  opacity: 0.15;
+}
+
+/* 4. Interactive Laser Pointer Dot */
+.hx-pet-laser-dot {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff2244;
+  box-shadow: 0 0 10px #ff2244, 0 0 20px #ff0033, 0 0 35px rgba(255, 0, 50, 0.8);
+  pointer-events: none;
+  z-index: 2147483646 !important;
+  transform: translate(-50%, -50%);
+  animation: hxLaserPulse 0.6s infinite alternate ease-in-out;
+}
+
+@keyframes hxLaserPulse {
+  from { transform: translate(-50%, -50%) scale(0.85); opacity: 0.9; }
+  to { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+}
+
+.hx-laser-hud {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 24, 34, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid #ff2244;
+  border-radius: 999px;
+  padding: 4px 16px;
+  color: #ff6677;
+  font-size: 11px;
+  font-family: monospace;
+  pointer-events: none;
+  z-index: 2147483645 !important;
+  box-shadow: 0 0 12px rgba(255, 34, 68, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 5. Physics Bouncing Ball */
+.hx-pet-ball {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffd166, #ff9d00 65%, #c76a00 100%);
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 10px rgba(255, 157, 0, 0.6), 0 4px 10px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+  cursor: grab;
+  z-index: 2147483612 !important;
+  transform: translate(-50%, -50%);
+  image-rendering: pixelated;
+  transition: transform 0.1s;
+}
+
+.hx-pet-ball:hover {
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 0 14px rgba(255, 157, 0, 0.85);
+}
+
+/* 6. Floating Pixel Particles & Hearts */
+.hx-pet-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 2147483625 !important;
+  image-rendering: pixelated;
+  animation: hxParticleFly 0.85s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+@keyframes hxParticleFly {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--p-dx, 0px), var(--p-dy, -35px)) scale(1.4); }
+}
+
+/* SVG Pixel Heart Particle */
+.hx-pet-heart {
+  width: 14px;
+  height: 14px;
+  color: #ff3366;
+}
+
+.hx-pet-heart svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}

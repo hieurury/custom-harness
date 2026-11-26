@@ -1,0 +1,214 @@
+{
+  "id": "pixel_owl",
+  "name": "Hooty",
+  "englishName": "Hooty the Owl",
+  "version": "1.0.0",
+  "description": "Chú cú mèo thông thái, người bạn đồng hành thức đêm cùng lập trình viên. Thích bay lượn, đậu trên khung chat và soi code.",
+  "author": "OpenCode Harness",
+  "grid": {
+    "width": 16,
+    "height": 16
+  },
+  "defaultScale": 2.5,
+  "rendering": "pixelated",
+  "capabilities": {
+    "locomotion": ["walk", "fly", "swim", "glide"],
+    "perchOn": ["platform", "edge", "ui_element"],
+    "swimIn": ["water"],
+    "vulnerableTo": ["lightning_strike", "heavy_rain"]
+  },
+  "reactsTo": {
+    "layout_regions": {
+      "input": { "land": "perch", "user_typing": "curious" },
+      "nav": { "land": "perch" },
+      "overlay": { "appear": "look_around" }
+    },
+    "surfaces": {
+      "water": { "land": "swim", "walk_near": "drink" },
+      "ground": { "land": "walk" },
+      "platform": { "land": "perch" },
+      "tree": { "land": "perch" }
+    },
+    "entities": {
+      "lightning_bolt": {
+        "hit": { "animation": "electrocuted", "dialogue": "Oái! Sét đánh cháy đen lông cánh {pet} rồi!", "pauseMs": 2600 },
+        "near": { "animation": "look_around", "dialogue": "Giông bão dữ dội quá {user} ơi, hoot!", "radius": 120 }
+      },
+      "rain_drop": {
+        "continuous": { "animation": "swim", "condition": "not_flying" }
+      },
+      "other_pet": {
+        "near": { "dialogue": "Hoot? Có bạn pet nào đang ở gần đây!", "radius": 80 },
+        "collision": { "animation": "happy" }
+      },
+      "food_item": {
+        "near": { "animation": "curious", "radius": 60 },
+        "touch": { "animation": "eat" }
+      }
+    },
+    "ui_events": {
+      "entity_hit_ui_prompt_bar": { "animation": "curious", "dialogue": "Ô gõ prompt vừa rung rinh kìa hoot!" }
+    }
+  },
+  "physics": {
+    "canFly": true,
+    "flightSpeed": 2.2,
+    "walkSpeed": 1.2,
+    "gravity": 0.35,
+    "perchOnElements": [
+      "[data-testid=\"chat-input\"]",
+      "[data-slot=\"input-wrapper\"]",
+      "[data-slot=\"header\"]",
+      "[data-component=\"terminal\"]",
+      ".antigravity-prompt-bar",
+      ".hx-modal",
+      "#hx-navbtn"
+    ]
+  },
+  "animations": {
+    "idle": {
+      "file": "sprites/idle.png",
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "description": "Đứng thở nhẹ, chớp mắt"
+    },
+    "look_around": {
+      "file": "sprites/look_around.png",
+      "frames": 6,
+      "fps": 4,
+      "loop": false,
+      "description": "Quay đầu 180 độ quan sát xung quanh"
+    },
+    "walk": {
+      "file": "sprites/walk.png",
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "description": "Nhảy nhót lạch bạch từng bước"
+    },
+    "fly": {
+      "file": "sprites/fly.png",
+      "frames": 4,
+      "fps": 8,
+      "loop": true,
+      "description": "Đập cánh bay lượn"
+    },
+    "glide": {
+      "file": "sprites/glide.png",
+      "frames": 2,
+      "fps": 3,
+      "loop": true,
+      "description": "Xòe rộng cánh hạ cánh nhẹ nhàng"
+    },
+    "perch": {
+      "file": "sprites/perch.png",
+      "frames": 2,
+      "fps": 2,
+      "loop": true,
+      "description": "Đậu yên tĩnh trên thanh menu hoặc ô gõ prompt"
+    },
+    "sleep": {
+      "file": "sprites/sleep.png",
+      "frames": 3,
+      "fps": 1.5,
+      "loop": true,
+      "description": "Gục đầu ngủ ngon lành, nổi icon zZz"
+    },
+    "dragged": {
+      "file": "sprites/dragged.png",
+      "frames": 4,
+      "fps": 10,
+      "loop": true,
+      "description": "Bị con trỏ chuột nhấc lên lơ lửng, vẫy cánh hoảng loạn"
+    },
+    "typing": {
+      "file": "sprites/typing.png",
+      "frames": 4,
+      "fps": 8,
+      "loop": true,
+      "description": "Dùng mỏ mổ bàn phím cọc cạch để tranh gõ prompt"
+    },
+    "curious": {
+      "file": "sprites/curious.png",
+      "frames": 3,
+      "fps": 3,
+      "loop": false,
+      "description": "Nghiêng đầu 45 độ tò mò thắc mắc"
+    },
+    "eat": {
+      "file": "sprites/eat.png",
+      "frames": 4,
+      "fps": 5,
+      "loop": false,
+      "description": "Mở mỏ đớp mồi, nhai nhai và nuốt ngon lành"
+    },
+    "happy": {
+      "file": "sprites/happy.png",
+      "frames": 4,
+      "fps": 7,
+      "loop": true,
+      "description": "Vỗ cánh nhảy cẫng lên vui sướng, mắt tít cười"
+    },
+    "refuse": {
+      "file": "sprites/refuse.png",
+      "frames": 4,
+      "fps": 6,
+      "loop": false,
+      "description": "Lắc đầu quầy quậy từ chối, nhắm tịt mắt chê"
+    },
+    "pounce": {
+      "file": "sprites/pounce.png",
+      "frames": 4,
+      "fps": 8,
+      "loop": false,
+      "description": "Rạp mình phóng tới vồ con mồi hoặc bóng"
+    },
+    "swim": {
+      "file": "sprites/swim.png",
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "description": "Rơi xuống nước, nổi lềnh bềnh và vẫy cánh bơi lạch bạch"
+    },
+    "electrocuted": {
+      "file": "sprites/electrocuted.png",
+      "frames": 4,
+      "fps": 10,
+      "loop": true,
+      "description": "Bị sét đánh cháy đen thui, bốc khói và giật mình"
+    }
+  },
+  "options": [
+    {
+      "id": "scale",
+      "type": "segmented",
+      "label": "Kích thước hiển thị",
+      "default": 2.5,
+      "choices": [
+        { "value": 1.5, "label": "Bé xíu" },
+        { "value": 2.0, "label": "Nhỏ" },
+        { "value": 2.5, "label": "Chuẩn" },
+        { "value": 3.0, "label": "Lớn" }
+      ]
+    },
+    {
+      "id": "mischiefRate",
+      "type": "segmented",
+      "label": "Tần suất quậy phá",
+      "default": 0.3,
+      "choices": [
+        { "value": 0.0, "label": "Ngoan ngoãn" },
+        { "value": 0.3, "label": "Thỉnh thoảng" },
+        { "value": 0.6, "label": "Nghịch ngợm" },
+        { "value": 0.9, "label": "Quậy tới bến" }
+      ]
+    },
+    {
+      "id": "nightOwlMode",
+      "type": "toggle",
+      "label": "Chế độ Cú Đêm (Tỉnh táo sau 22:00)",
+      "default": true
+    }
+  ]
+}

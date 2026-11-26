@@ -1,0 +1,131 @@
+/* ==========================================================================
+ * Pixel 16-bit — Antigravity Harness theme
+ * Variables injected by Harness: --hx-bg --hx-fg --hx-accent --hx-px --hx-font-uiFont --hx-font-codeFont
+ * ======================================================================== */
+:root {
+  --hx-surface:  color-mix(in srgb, var(--hx-bg) 93%, var(--hx-fg));
+  --hx-surface2: color-mix(in srgb, var(--hx-bg) 85%, var(--hx-fg));
+  --hx-line:     color-mix(in srgb, var(--hx-fg) 75%, var(--hx-bg));
+  --hx-line-dim: color-mix(in srgb, var(--hx-fg) 32%, var(--hx-bg));
+  --hx-dim:      color-mix(in srgb, var(--hx-fg) 62%, var(--hx-bg));
+  --hx-shadow:   color-mix(in srgb, var(--hx-fg) 22%, var(--hx-bg));
+  --hx-radius: 0px;
+  --hx-font-ui-menu: var(--hx-font-uiFont);
+  --hx-font-code: var(--hx-font-codeFont);
+  --hx-frame:
+    calc(var(--hx-px) * -1) 0 0 0 var(--hx-line), var(--hx-px) 0 0 0 var(--hx-line),
+    0 calc(var(--hx-px) * -1) 0 0 var(--hx-line), 0 var(--hx-px) 0 0 var(--hx-line),
+    calc(var(--hx-px) * 3) calc(var(--hx-px) * 3) 0 0 var(--hx-shadow);
+}
+
+/* 1. App colour variables -------------------------------------------------- */
+:root, body, body[data-agy-theme], body.dark, body.theme-dark {
+  --background: var(--hx-bg) !important;
+  --body-background: var(--hx-bg) !important;
+  --shell: var(--hx-bg) !important;
+  --shell-canvas: var(--hx-bg) !important;
+  --sidebar: var(--hx-surface) !important;
+  --color-sidebar: var(--hx-surface) !important;
+  --card: var(--hx-surface) !important;
+  --glass: var(--hx-bg) !important;
+  --popover: var(--hx-bg) !important;
+  --secondary: var(--hx-surface2) !important;
+  --sidebar-secondary: var(--hx-surface2) !important;
+  --muted: var(--hx-surface2) !important;
+  --sidebar-muted: var(--hx-surface2) !important;
+  --border: var(--hx-line-dim) !important;
+  --card-border: var(--hx-line) !important;
+  --card-edge: var(--hx-line) !important;
+  --glass-border: var(--hx-line) !important;
+  --glass-highlight: transparent !important;
+  --foreground: var(--hx-fg) !important;
+  --secondary-foreground: color-mix(in srgb, var(--hx-fg) 88%, var(--hx-bg)) !important;
+  --muted-foreground: var(--hx-dim) !important;
+  --primary: var(--hx-accent) !important;
+  --primary-foreground: var(--hx-bg) !important;
+  --cta: var(--hx-accent) !important;
+  --cta-foreground: var(--hx-bg) !important;
+  --link: var(--hx-accent) !important;
+  --nux-focus-ring: var(--hx-accent) !important;
+  --focus-ring-color: var(--hx-accent) !important;
+  --card-radius: 0px !important;
+  --nux-radius-md: 0px !important;
+  --nux-radius-lg: 0px !important;
+  --nux-radius-xl: 0px !important;
+  --nux-composer-radius: 0px !important;
+  --glass-shadow: none !important;
+  --peek-shadow: none !important;
+}
+
+/* 2. Typography ------------------------------------------------------------ */
+html, body, button, input, textarea, select, [role="menu"], [role="dialog"] {
+  font-family: var(--hx-font-uiFont) !important;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+}
+pre, code, kbd, samp, .font-mono, [class*="font-mono"], .xterm, .monaco-editor, .cm-editor {
+  font-family: var(--hx-font-codeFont) !important;
+}
+pre *, code *, .font-mono *, [class*="font-mono"] * { font-family: inherit !important; }
+
+/* 3. Hard edges everywhere --------------------------------------------------- */
+*, *::before, *::after { border-radius: 0 !important; }
+.hx-root .hx-sw, .hx-root .hx-sw::after, .hx-root .hx-tag { border-radius: 0 !important; }
+
+/* 4. Pixel frames (stair-step border, no blur) ------------------------------- */
+.surface-composer, .surface-glass, .agy-card, .artifact-card, .agy-callout, .agy-takeover-card,
+[role="menu"], [role="listbox"], [role="dialog"], [role="alertdialog"], .quick-input-widget,
+[data-radix-popper-content-wrapper] > *, [data-radix-menu-content] {
+  border: 0 !important;
+  background-color: var(--hx-bg) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow:
+    calc(var(--hx-px) * -1) 0 0 0 var(--hx-line), var(--hx-px) 0 0 0 var(--hx-line),
+    0 calc(var(--hx-px) * -1) 0 0 var(--hx-line), 0 var(--hx-px) 0 0 var(--hx-line) !important;
+  margin: var(--hx-px);
+}
+[role="menu"], [role="listbox"], [role="dialog"], [role="alertdialog"], [data-radix-popper-content-wrapper] > * {
+  box-shadow:
+    calc(var(--hx-px) * -1) 0 0 0 var(--hx-line), var(--hx-px) 0 0 0 var(--hx-line),
+    0 calc(var(--hx-px) * -1) 0 0 var(--hx-line), 0 var(--hx-px) 0 0 var(--hx-line),
+    calc(var(--hx-px) * 3) calc(var(--hx-px) * 3) 0 0 var(--hx-shadow) !important;
+}
+
+/* 5. Buttons / rows ----------------------------------------------------------- */
+.agy-button, button { transition: none; }
+.agy-button:hover:not(:disabled), .agy-sidebar-row:hover {
+  background-color: var(--hx-fg) !important;
+  color: var(--hx-bg) !important;
+}
+.agy-button:hover:not(:disabled) *, .agy-sidebar-row:hover * { color: inherit !important; }
+.agy-button:active:not(:disabled) { transform: translate(var(--hx-px), var(--hx-px)); }
+[data-testid="left-sidebar"], aside { border-right: var(--hx-px) solid var(--hx-line) !important; }
+
+/* 6. Inputs, selection, scrollbars -------------------------------------------- */
+::selection { background: var(--hx-accent); color: var(--hx-bg); }
+textarea, input { caret-color: var(--hx-accent); }
+:focus-visible { outline: var(--hx-px) dashed var(--hx-accent) !important; outline-offset: 1px; }
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: var(--hx-bg) !important; border-left: 1px solid var(--hx-line-dim); }
+::-webkit-scrollbar-thumb { background: var(--hx-line) !important; border: 2px solid var(--hx-bg) !important; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--hx-accent) !important; }
+
+/* 7. Background effects --------------------------------------------------------- */
+html[data-hx-bg="dots"]::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 2147482000;
+  background-image: radial-gradient(circle at 1px 1px, var(--hx-fg) 1px, transparent 1.2px);
+  background-size: 8px 8px; opacity: .07;
+}
+html[data-hx-bg="dots"][data-hx-anim="full"]::before { animation: hx-drift 6s steps(8) infinite; }
+@keyframes hx-drift { to { background-position: 8px 8px; } }
+
+/* 8. Motion ---------------------------------------------------------------------- */
+html[data-hx-anim="off"] *, html[data-hx-anim="off"] *::before, html[data-hx-anim="off"] *::after {
+  transition: none !important; animation: none !important;
+}
+html:not([data-hx-anim="off"]) .animate-spin { animation-timing-function: steps(8) !important; }
+html:not([data-hx-anim="off"]) .animate-pulse { animation-timing-function: steps(4) !important; }
+html:not([data-hx-anim="off"]) button, html:not([data-hx-anim="off"]) .agy-sidebar-row { transition: background-color 90ms steps(2), color 90ms steps(2), transform 90ms steps(2) !important; }
+html[data-hx-anim="full"] [role="menu"], html[data-hx-anim="full"] [role="dialog"], html[data-hx-anim="full"] .hx-modal { animation: hx-pop 160ms steps(4) both; }
+@keyframes hx-pop { from { transform: scale(.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }

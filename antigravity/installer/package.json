@@ -1,0 +1,111 @@
+{
+  "name": "custom-harness-installer",
+  "version": "1.0.0",
+  "description": "One-click installer for Custom Harness — modular customization and extensions for Google Antigravity",
+  "main": "main.js",
+  "author": "hieurury",
+  "homepage": "https://github.com/hieurury/custom-harness",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "sync:version": "node ../scripts/sync-version.js",
+    "build:linux": "npm run sync:version && electron-builder --linux deb AppImage",
+    "build:win": "npm run sync:version && electron-builder --win nsis",
+    "build:all": "npm run sync:version && electron-builder --linux deb AppImage --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^45.5.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.antigravity.harness.installer",
+    "productName": "Custom Harness Installer",
+    "asar": false,
+    "artifactName": "Custom-Harness-Setup-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "assets/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../runtime",
+        "to": "runtime",
+        "filter": [
+          "**/*",
+          "!**/*.bak",
+          "!**/.DS_Store",
+          "!**/Thumbs.db"
+        ]
+      },
+      {
+        "from": "../patcher",
+        "to": "patcher",
+        "filter": [
+          "**/*",
+          "!**/*.bak",
+          "!**/.DS_Store",
+          "!**/Thumbs.db"
+        ]
+      },
+      {
+        "from": "../../licenses",
+        "to": "licenses",
+        "filter": ["**/*"]
+      }
+    ],
+    "linux": {
+      "target": [
+        "deb",
+        "AppImage"
+      ],
+      "category": "Utility",
+      "icon": "assets/icon.png",
+      "maintainer": "hieurury <noreply@example.com>",
+      "synopsis": "One-click customization and extension installer for Google Antigravity",
+      "description": "Installs, updates, and restores Custom Harness customizations and interactive extensions safely."
+    },
+    "deb": {
+      "depends": [
+        "libgtk-3-0t64 | libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0t64 | libatspi2.0-0",
+        "libuuid1"
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "signExecutable": false,
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "runAfterFinish": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Custom Harness Installer",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico",
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}

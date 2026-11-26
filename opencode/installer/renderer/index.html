@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Harness Installer</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; script-src 'self'" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <img class="logo" src="../assets/icon.png" alt="Custom Harness" />
+      <div class="hero-text">
+        <div class="title-row">
+          <h1>Custom Harness</h1>
+          <span id="harness-version" class="ver-tag hidden"></span>
+        </div>
+        <p>Chọn ứng dụng, theme và tiện ích bạn muốn sử dụng.</p>
+      </div>
+      <span id="status-pill" class="pill pill-neutral">Đang kiểm tra...</span>
+    </header>
+
+    <section class="card update-card" aria-labelledby="update-title">
+      <div class="card-head"><span id="update-title">Cập nhật</span><span id="update-version" class="ver-tag hidden"></span></div>
+      <p id="update-note" class="meta-line" aria-live="polite">Đang kiểm tra phiên bản mới...</p>
+      <div class="update-actions">
+        <button id="btn-check-update" class="btn btn-ghost" type="button">Kiểm tra lại</button>
+        <button id="btn-download-update" class="btn btn-primary" type="button" disabled>Tải bản mới</button>
+        <button id="btn-show-update" class="btn btn-ghost hidden" type="button">Hiện file đã tải</button>
+      </div>
+    </section>
+
+    <nav id="target-tabs" class="target-tabs" role="tablist" aria-label="Chọn tích hợp"></nav>
+    <main id="target-panel" role="tabpanel" tabindex="0">
+    <section class="card">
+      <div class="card-head">
+        <span id="app-label">Ứng dụng</span>
+        <button id="btn-refresh" class="btn-link" type="button">
+          <svg viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges"><rect x="4" y="2" width="7" height="2"/><rect x="11" y="4" width="2" height="3"/><rect x="9" y="6" width="5" height="2"/><rect x="2" y="4" width="2" height="8"/><rect x="4" y="12" width="8" height="2"/><rect x="12" y="10" width="2" height="2"/></svg>
+          <span>Quét lại</span>
+        </button>
+      </div>
+      <div class="path-row">
+        <input id="app-dir" type="text" readonly placeholder="Chưa tìm thấy thư mục OpenCode..." />
+        <button id="btn-browse" class="btn btn-ghost" type="button">
+          <svg viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges"><rect x="1" y="3" width="6" height="2"/><rect x="1" y="5" width="14" height="8"/><rect x="3" y="7" width="10" height="4" fill="#14161e"/></svg>
+          <span>Chọn thư mục...</span>
+        </button>
+      </div>
+      <div id="meta-line" class="meta-line"></div>
+    </section>
+
+    <section id="running-banner" class="alert alert-warn hidden">
+      <div>
+        <strong id="running-title">Ứng dụng đang mở</strong>
+        <p>Hãy lưu công việc rồi đóng ứng dụng trong tab này trước khi cài đặt hoặc gỡ bỏ.</p>
+      </div>
+      <button id="btn-close-app" class="btn btn-warn" type="button">Đóng giúp tôi</button>
+    </section>
+
+    <section id="perm-banner" class="alert alert-danger hidden">
+      <div>
+        <strong>Thiếu quyền ghi vào thư mục cài đặt</strong>
+        <p>Ứng dụng nằm trong vùng hệ thống. Hãy chạy lại trình cài đặt với quyền Quản trị viên (Administrator / pkexec).</p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="options-title">
+      <div class="card-head" id="options-title">Tùy chọn harness</div>
+      <label class="checkbox-row"><input id="apply-options" type="checkbox" /><span>Áp dụng các lựa chọn bên dưới khi cài đặt / cập nhật</span></label>
+      <p id="options-note" class="meta-line">Bỏ chọn để giữ nguyên toàn bộ cấu hình cá nhân hiện có.</p>
+      <fieldset id="options-fields">
+        <label class="option-field">Theme<select id="theme-select"></select></label>
+        <div id="theme-options" class="options-grid"></div>
+        <label class="checkbox-row"><input id="pets-enabled" type="checkbox" /><span>Bật pet tương tác</span></label>
+        <div id="pet-options" class="pet-options"></div>
+      </fieldset>
+      <p class="meta-line">Các tài nguyên đi kèm vẫn được cài đầy đủ để bạn đổi lại trong Harness. API key và hội thoại không bị ghi đè.</p>
+    </section>
+
+    <section class="actions">
+      <button id="btn-install" class="btn btn-primary" type="button">
+        <svg viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges"><rect x="7" y="2" width="2" height="7"/><rect x="5" y="7" width="6" height="2"/><rect x="6" y="9" width="4" height="1"/><rect x="2" y="12" width="12" height="2"/><rect x="2" y="10" width="2" height="2"/><rect x="12" y="10" width="2" height="2"/></svg>
+        <span>Cài đặt / Áp dụng lại</span>
+      </button>
+      <button id="btn-uninstall" class="btn btn-danger" type="button">
+        <svg viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges"><rect x="3" y="3" width="2" height="2"/><rect x="5" y="5" width="2" height="2"/><rect x="7" y="7" width="2" height="2"/><rect x="9" y="9" width="2" height="2"/><rect x="11" y="11" width="2" height="2"/><rect x="11" y="3" width="2" height="2"/><rect x="9" y="5" width="2" height="2"/><rect x="5" y="9" width="2" height="2"/><rect x="3" y="11" width="2" height="2"/></svg>
+        <span>Gỡ cài đặt (Khôi phục gốc)</span>
+      </button>
+    </section>
+
+    <label class="checkbox-row">
+      <input id="chk-purge" type="checkbox" />
+      <span>Khi gỡ cài đặt, xóa luôn cấu hình cá nhân và API key đã lưu</span>
+    </label>
+
+    <section id="result-box" class="result hidden"></section>
+    </main>
+
+    <footer class="footer">
+      <button id="btn-open-data" class="btn-link" type="button">
+        <svg viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges"><rect x="1" y="3" width="6" height="2"/><rect x="1" y="5" width="14" height="8"/></svg>
+        <span>Mở thư mục cấu hình &amp; backup</span>
+      </button>
+      <span id="entry-hint" class="hint">Menu OpenCode → Harness · Ctrl+Shift+H</span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

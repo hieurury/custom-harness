@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-linux:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: opencode/installer/package-lock.json
+      - name: Install dependencies
+        run: npm --prefix opencode/installer ci
+      - name: Test installer and updater
+        run: npm --prefix opencode/installer test
+      - name: Test Electron UI
+        run: xvfb-run -a npm --prefix opencode/installer run test:ui
+      - name: Build Linux packages
+        run: npm --prefix opencode/installer run build:linux
+      - name: Upload Linux build artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ci-linux-build
+          path: |
+            opencode/installer/dist/*.deb
+            opencode/installer/dist/*.AppImage
+          if-no-files-found: error
+          retention-days: 5
+
+  windows-build:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: opencode/installer/package-lock.json
+      - name: Install dependencies
+        run: npm --prefix opencode/installer ci
+      - name: Build unsigned test installer (no signing secrets)
+        run: npm --prefix opencode/installer run build:win
+      - name: Upload Windows test artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ci-windows-build
+          path: opencode/installer/dist/*.exe
+          if-no-files-found: error
+          retention-days: 5

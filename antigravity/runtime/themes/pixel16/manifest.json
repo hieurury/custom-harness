@@ -1,0 +1,44 @@
+{
+  "name": "Pixel 16-bit",
+  "description": "Phong cách cổ điển sắc nét mang hơi hướng đồ họa pixel, tương phản cao và giàu cá tính.",
+  "version": "1.0.0",
+  "scope": "visual",
+  "thumbnail": "thumbnail.png",
+  "options": [
+    {
+      "id": "palette", "type": "palette", "group": "Màu sắc", "label": "Bộ màu", "default": "mono",
+      "customColors": { "bg": "#000000", "fg": "#ffffff", "accent": "#ff3b3b" },
+      "customLabels": { "bg": "Nền", "fg": "Chữ", "accent": "Nhấn" },
+      "palettes": [
+        { "id": "mono",    "name": "Đen - Trắng",    "bg": "#000000", "fg": "#ffffff", "accent": "#ffffff" },
+        { "id": "red",     "name": "Đen - Đỏ",       "bg": "#0a0000", "fg": "#ffe3e3", "accent": "#ff3030" },
+        { "id": "green",   "name": "Đen - Xanh lá",  "bg": "#000a02", "fg": "#c8ffd2", "accent": "#2dff5a" },
+        { "id": "amber",   "name": "Đen - Hổ phách", "bg": "#0a0600", "fg": "#ffe6b0", "accent": "#ffb000" },
+        { "id": "cyan",    "name": "Đen - Cyan",     "bg": "#00090c", "fg": "#d6f8ff", "accent": "#00e5ff" },
+        { "id": "violet",  "name": "Đen - Tím",      "bg": "#07000d", "fg": "#f0e0ff", "accent": "#b36bff" },
+        { "id": "gameboy", "name": "Game Boy",       "bg": "#0f380f", "fg": "#9bbc0f", "accent": "#8bac0f" },
+        { "id": "paper",   "name": "Trắng - Xanh",   "bg": "#f4f4ee", "fg": "#10131a", "accent": "#1f4fff", "scheme": "light" }
+      ]
+    },
+    {
+      "id": "uiFont", "type": "font", "kind": "ui", "group": "Font chữ", "label": "Font giao diện", "default": "vt323",
+      "choices": ["vt323", "press-start-2p", "silkscreen", "jetbrains-mono", "system"]
+    },
+    {
+      "id": "codeFont", "type": "font", "kind": "code", "group": "Font chữ", "label": "Font code và terminal", "default": "jetbrains-mono",
+      "choices": ["jetbrains-mono", "vt323", "system"]
+    },
+    {
+      "id": "pixelSize", "type": "segmented", "group": "Hiệu ứng", "label": "Độ dày viền pixel", "default": 2,
+      "choices": [ { "value": 1, "label": "Mỏng" }, { "value": 2, "label": "Vừa" }, { "value": 3, "label": "Dày" } ]
+    },
+    {
+      "id": "background", "type": "segmented", "group": "Hiệu ứng", "label": "Hiệu ứng nền", "default": "dots",
+      "choices": [ { "value": "none", "label": "Tắt" }, { "value": "dots", "label": "Lưới chấm" }, { "value": "stars", "label": "Sao rơi" }, { "value": "dither", "label": "Nhiễu dither" } ]
+    },
+    {
+      "id": "animation", "type": "segmented", "group": "Hiệu ứng", "label": "Chuyển động", "default": "low",
+      "choices": [ { "value": "off", "label": "Tắt" }, { "value": "low", "label": "Nhẹ" }, { "value": "full", "label": "Đầy đủ" } ]
+    }
+  ]
+}

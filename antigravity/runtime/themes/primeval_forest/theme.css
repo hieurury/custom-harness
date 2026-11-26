@@ -1,0 +1,403 @@
+/* ==========================================================================
+ * Rừng Nguyên Sinh (Primeval Forest) — Antigravity Theme
+ * Trong suốt, tập trung vào thiên nhiên rừng nguyên sinh, tối giản border
+ * ======================================================================== */
+
+:root {
+  --hx-px: 1px;
+  --hx-moss-bright: #7ed957;
+  --hx-amber: #f5b942;
+  --hx-parchment: #f2ede4;
+  --hx-parchment-dim: #a4b8a8;
+  --hx-line: rgba(75, 120, 90, 0.25);
+  --hx-line-dim: rgba(50, 85, 65, 0.2);
+  --hx-line-bright: rgba(126, 217, 87, 0.4);
+
+  --hx-font-ui-menu: var(--hx-font-uiFont, inherit);
+  --hx-font-code: var(--hx-font-codeFont, monospace);
+
+  --hx-frame: 0 0 0 1px var(--hx-line);
+}
+
+/* 1. Root & App Transparency ----------------------------------------------- */
+:root,
+body,
+body[data-agy-theme],
+body.dark,
+body.theme-dark {
+  --background: transparent !important;
+  --body-background: transparent !important;
+  --shell: transparent !important;
+  --shell-canvas: transparent !important;
+  --sidebar: rgba(10, 18, 14, 0.45) !important;
+  --color-sidebar: rgba(10, 18, 14, 0.45) !important;
+  --card: rgba(12, 22, 17, 0.50) !important;
+  --glass: rgba(12, 22, 17, 0.45) !important;
+  --popover: #132219 !important;
+
+  --secondary: rgba(62, 107, 77, 0.25) !important;
+  --sidebar-secondary: rgba(62, 107, 77, 0.25) !important;
+  --muted: rgba(26, 46, 34, 0.4) !important;
+  --sidebar-muted: rgba(26, 46, 34, 0.3) !important;
+
+  --border: var(--hx-line) !important;
+  --card-border: var(--hx-line) !important;
+  --card-edge: transparent !important;
+  --glass-border: var(--hx-line) !important;
+  --glass-highlight: transparent !important;
+
+  --foreground: var(--hx-parchment) !important;
+  --secondary-foreground: #dbe4dc !important;
+  --muted-foreground: var(--hx-parchment-dim) !important;
+
+  --primary: var(--hx-moss-bright) !important;
+  --primary-foreground: #0c1811 !important;
+  --cta: var(--hx-amber) !important;
+  --cta-foreground: #0f1813 !important;
+  --link: #9ae675 !important;
+  --nux-focus-ring: rgba(126, 217, 87, 0.35) !important;
+  --focus-ring-color: rgba(126, 217, 87, 0.35) !important;
+
+  --card-radius: 4px !important;
+  --nux-radius-md: 4px !important;
+  --nux-radius-lg: 6px !important;
+  --nux-radius-xl: 6px !important;
+  --nux-composer-radius: 6px !important;
+  --glass-shadow: none !important;
+  --peek-shadow: none !important;
+}
+
+/* 2. Top-Level Shell & Conversation Workspace (Trút bỏ hoàn toàn khối che phủ) */
+html,
+body,
+#root {
+  background-color: transparent !important;
+  color-scheme: dark !important;
+}
+
+.agy-shell,
+.agy-sheet,
+.agy-sheet [data-sheet-inset],
+[class*="group/pane"],
+.group\/pane,
+.agy-sheet [class*="group/pane"] {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.browser-hole-opaque,
+.browser-hole-ancestor,
+[class*="browser-hole"] {
+  background-color: transparent !important;
+}
+
+/* 3. Typography ------------------------------------------------------------ */
+html, body, button, input, textarea, select, [role="menu"], [role="dialog"] {
+  font-family: var(--hx-font-uiFont, "JetBrains Mono", sans-serif) !important;
+}
+pre, code, kbd, samp, .font-mono, [class*="font-mono"], .xterm, .monaco-editor, .cm-editor {
+  font-family: var(--hx-font-codeFont, "JetBrains Mono", monospace) !important;
+}
+pre *, code *, .font-mono *, [class*="font-mono"] * {
+  font-family: inherit !important;
+}
+
+/* 4. Left Sidebar: Trong suốt mờ, loại bỏ viền khối từng mục ---------------- */
+[data-testid="left-sidebar"],
+.bg-sidebar,
+aside {
+  background-color: rgba(9, 17, 13, 0.45) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-right: 1px solid rgba(75, 120, 90, 0.2) !important;
+  box-shadow: none !important;
+}
+
+/* Xóa viền bao quanh từng nút/dòng trong sidebar */
+.bg-sidebar .agy-button,
+.bg-sidebar a,
+.bg-sidebar button,
+.agy-sidebar-row {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  border-radius: 4px !important;
+  transition: background-color 100ms ease !important;
+}
+
+.bg-sidebar .agy-button:hover,
+.bg-sidebar a:hover,
+.bg-sidebar button:hover,
+.agy-sidebar-row:hover {
+  background-color: rgba(62, 107, 77, 0.35) !important;
+  color: #ffffff !important;
+}
+
+/* Mục hội thoại đang chọn */
+.bg-sidebar [class*="bg-accent"],
+.bg-sidebar [class*="bg-sidebar-accent"],
+.bg-sidebar [aria-selected="true"] {
+  background-color: rgba(126, 217, 87, 0.18) !important;
+  border: none !important;
+  box-shadow: inset 3px 0 0 0 var(--hx-moss-bright) !important;
+  color: #ffffff !important;
+}
+
+/* 5. Header & Top Navigation Bar ------------------------------------------- */
+header,
+.antigravity-header,
+[class*="header"] {
+  background-color: rgba(9, 17, 13, 0.35) !important;
+  backdrop-filter: blur(6px) !important;
+  border-bottom: 1px solid rgba(75, 120, 90, 0.18) !important;
+  box-shadow: none !important;
+}
+
+/* 6. Chat Composer / Prompt Input Box (Gọn gàng, hơi trong suốt, không viền kép dày) */
+.surface-composer,
+#antigravity\.agentSidePanelInputBox,
+[id="antigravity.agentSidePanelInputBox"] {
+  background-color: rgba(10, 19, 14, 0.55) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(126, 217, 87, 0.30) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+.surface-composer:focus-within,
+#antigravity\.agentSidePanelInputBox:focus-within {
+  border-color: rgba(126, 217, 87, 0.65) !important;
+  box-shadow: 0 0 0 1px rgba(126, 217, 87, 0.4), 0 6px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.surface-composer > .surface-composer-card {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 7. Conversation Messages & Text (Thoáng đãng, nổi tự nhiên trên nền rừng) -- */
+/* User Input Step: Loại bỏ hoàn toàn nền và khung bao bên ngoài, chỉ giữ khung prompt bên trong */
+[class*="group/user-input-step"] {
+  background-color: transparent !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.agy-user-bubble {
+  background-color: rgba(14, 25, 19, 0.75) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(75, 140, 95, 0.35) !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Markdown typography in chat: Sắc nét, dễ đọc trên nền rừng */
+[data-markdown-root] {
+  color: var(--hx-parchment) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+}
+[data-markdown-root] p,
+[data-markdown-root] li,
+[data-markdown-root] span {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+}
+[data-markdown-root] h1,
+[data-markdown-root] h2,
+[data-markdown-root] h3 {
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(75, 120, 90, 0.25) !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+[data-markdown-root] strong,
+[data-markdown-root] b {
+  color: var(--hx-amber) !important;
+}
+[data-markdown-root] a {
+  color: var(--hx-moss-bright) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Code Blocks */
+pre,
+.code-block-container,
+div:has(> pre[class*="language-"]) {
+  background-color: rgba(9, 16, 12, 0.70) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(75, 120, 90, 0.22) !important;
+  border-radius: 4px !important;
+}
+code:not(pre code) {
+  background-color: rgba(18, 34, 25, 0.55) !important;
+  color: #7ed957 !important;
+  border: 1px solid rgba(75, 120, 90, 0.2) !important;
+  padding: 1px 5px !important;
+  border-radius: 3px !important;
+}
+
+/* Cards & artifacts */
+.agy-card,
+.artifact-card,
+.agy-callout,
+.agy-takeover-card,
+.surface-glass {
+  background-color: rgba(11, 20, 15, 0.50) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(75, 120, 90, 0.22) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* 8. Menus & Popovers ------------------------------------------------------ */
+[role="menu"],
+[role="listbox"],
+[role="dialog"],
+[role="alertdialog"],
+.quick-input-widget,
+[data-radix-popper-content-wrapper] > *,
+[data-radix-menu-content] {
+  background-color: #122119 !important;
+  border: 1px solid #3c6148 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.8) !important;
+}
+
+[role="menuitem"]:hover,
+[role="option"]:hover,
+[role="menuitem"][data-highlighted] {
+  background-color: #1e3829 !important;
+  color: #ffffff !important;
+}
+
+/* 9. Thành phần Harness: Tương phản rõ ràng với nền, dễ thao tác ------------ */
+.hx-root .hx-modal {
+  background: #122119 !important;
+  border: 1px solid #4a7558 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85) !important;
+}
+.hx-root .hx-side {
+  background: #15271e !important;
+  border-right: 1px solid #284433 !important;
+}
+.hx-root .hx-head {
+  background: #15271e !important;
+  border-bottom: 1px solid #284433 !important;
+}
+.hx-root .hx-card {
+  background: #1a3023 !important;
+  border: 1px solid #2f523c !important;
+  border-radius: 6px !important;
+}
+.hx-root .hx-card:hover {
+  border-color: #7ed957 !important;
+  background: #234232 !important;
+}
+.hx-root .hx-card.hx-on {
+  border-color: #7ed957 !important;
+  box-shadow: 0 0 0 2px #7ed957 !important;
+  background: #1e3a2b !important;
+}
+.hx-root .hx-tab.hx-on,
+.hx-root .hx-seg button.hx-on {
+  background: #7ed957 !important;
+  color: #0c1811 !important;
+  font-weight: 700 !important;
+}
+.hx-root .hx-tab:hover:not(.hx-on),
+.hx-root .hx-seg button:hover:not(.hx-on) {
+  background: #244432 !important;
+  color: #ffffff !important;
+}
+.hx-root .hx-seg button,
+.hx-root .hx-font {
+  background: #1a3023 !important;
+  border: 1px solid #2f523c !important;
+  border-radius: 4px !important;
+}
+.hx-root .hx-toggle .hx-sw {
+  background: #1a3023 !important;
+  border: 1px solid #2f523c !important;
+}
+.hx-root .hx-toggle .hx-sw.hx-on {
+  background: #7ed957 !important;
+}
+
+/* 10. Scrollbars ----------------------------------------------------------- */
+::selection {
+  background: var(--hx-moss-bright) !important;
+  color: #0c1811 !important;
+}
+textarea, input {
+  caret-color: var(--hx-amber) !important;
+}
+:focus-visible {
+  outline: 2px solid rgba(126, 217, 87, 0.6) !important;
+  outline-offset: 1px;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(75, 120, 90, 0.35) !important;
+  border-radius: 3px !important;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hx-moss-bright) !important;
+}
+
+/* 11. Weather Lightning Reaction ------------------------------------------- */
+html[data-hx-lightning="1"] .surface-composer,
+html[data-hx-lightning="true"] .surface-composer,
+html[data-hx-lightning="1"] .agy-user-bubble,
+html[data-hx-lightning="true"] .agy-user-bubble {
+  box-shadow: 0 0 16px rgba(220, 245, 255, 0.5) !important;
+  border-color: rgba(220, 245, 255, 0.75) !important;
+}
+
+html[data-hx-fx="high"][data-hx-shake="1"] body,
+html[data-hx-fx="high"][data-hx-shake="true"] body {
+  animation: hx-thunder-shake 180ms ease-in-out 1;
+}
+
+.hx-shake {
+  animation: hx-ui-lightning-shake 380ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both !important;
+  box-shadow: 0 0 18px rgba(150, 225, 255, 0.7) !important;
+}
+
+.hx-electrified {
+  box-shadow: 0 0 14px rgba(103, 232, 249, 0.45), inset 0 0 10px rgba(103, 232, 249, 0.16) !important;
+  border-color: rgba(165, 243, 252, 0.72) !important;
+  transition: box-shadow 180ms ease, border-color 180ms ease !important;
+}
+
+@keyframes hx-thunder-shake {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(2px, -1px); }
+  75% { transform: translate(-1px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes hx-ui-lightning-shake {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  15%, 45%, 75% { transform: translate3d(-4px, -1px, 0); }
+  30%, 60%, 90% { transform: translate3d(4px, 1px, 0); }
+}

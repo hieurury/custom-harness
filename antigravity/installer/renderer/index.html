@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Harness — Trình cài đặt</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <img class="logo" src="../assets/icon.png" alt="Custom Harness" />
+      <div class="hero-text">
+        <div class="title-row">
+          <h1>Custom Harness</h1>
+          <span id="harness-version" class="ver-tag hidden"></span>
+        </div>
+        <p>Nền tảng tùy biến giao diện &amp; mở rộng trải nghiệm cho Google Antigravity — cài đặt chỉ với 1 cú bấm.</p>
+      </div>
+      <span id="status-pill" class="pill pill-neutral">Đang kiểm tra...</span>
+    </header>
+
+    <section class="card">
+      <div class="card-head">
+        <span>Ứng dụng Antigravity</span>
+        <button id="btn-refresh" class="btn-link" type="button">
+          <svg viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges"><rect x="4" y="2" width="7" height="2"/><rect x="11" y="4" width="2" height="3"/><rect x="9" y="6" width="5" height="2"/><rect x="2" y="4" width="2" height="8"/><rect x="4" y="12" width="8" height="2"/><rect x="12" y="10" width="2" height="2"/></svg>
+          <span>Quét lại</span>
+        </button>
+      </div>
+      <div class="path-row">
+        <input id="app-dir" type="text" readonly placeholder="Chưa tìm thấy thư mục Antigravity..." />
+        <button id="btn-browse" class="btn btn-ghost" type="button">
+          <svg viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges"><rect x="1" y="3" width="6" height="2"/><rect x="1" y="5" width="14" height="8"/><rect x="3" y="7" width="10" height="4" fill="#14161e"/></svg>
+          <span>Chọn thư mục...</span>
+        </button>
+      </div>
+      <div id="meta-line" class="meta-line"></div>
+    </section>
+
+    <section id="running-banner" class="alert alert-warn hidden">
+      <div>
+        <strong>Antigravity đang mở</strong>
+        <p>Vui lòng đóng Antigravity trước khi cài đặt hoặc gỡ bỏ để tránh lỗi khóa file.</p>
+      </div>
+      <button id="btn-close-app" class="btn btn-warn" type="button">Đóng giúp tôi</button>
+    </section>
+
+    <section id="perm-banner" class="alert alert-danger hidden">
+      <div>
+        <strong>Thiếu quyền ghi vào thư mục cài đặt</strong>
+        <p>Thư mục Antigravity nằm trong vùng hệ thống. Hãy chạy lại trình cài đặt với quyền Quản trị viên (Administrator / pkexec).</p>
+      </div>
+    </section>
+
+    <section class="actions">
+      <button id="btn-install" class="btn btn-primary" type="button">
+        <svg viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges"><rect x="7" y="2" width="2" height="7"/><rect x="5" y="7" width="6" height="2"/><rect x="6" y="9" width="4" height="1"/><rect x="2" y="12" width="12" height="2"/><rect x="2" y="10" width="2" height="2"/><rect x="12" y="10" width="2" height="2"/></svg>
+        <span>Cài đặt / Áp dụng lại</span>
+      </button>
+      <button id="btn-uninstall" class="btn btn-danger" type="button">
+        <svg viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges"><rect x="3" y="3" width="2" height="2"/><rect x="5" y="5" width="2" height="2"/><rect x="7" y="7" width="2" height="2"/><rect x="9" y="9" width="2" height="2"/><rect x="11" y="11" width="2" height="2"/><rect x="11" y="3" width="2" height="2"/><rect x="9" y="5" width="2" height="2"/><rect x="5" y="9" width="2" height="2"/><rect x="3" y="11" width="2" height="2"/></svg>
+        <span>Gỡ cài đặt (Khôi phục gốc)</span>
+      </button>
+    </section>
+
+    <label class="checkbox-row">
+      <input id="chk-purge" type="checkbox" />
+      <span>Khi gỡ cài đặt, xóa luôn cấu hình cá nhân và API key đã lưu</span>
+    </label>
+
+    <section id="result-box" class="result hidden"></section>
+
+    <footer class="footer">
+      <button id="btn-open-data" class="btn-link" type="button">
+        <svg viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges"><rect x="1" y="3" width="6" height="2"/><rect x="1" y="5" width="14" height="8"/></svg>
+        <span>Mở thư mục cấu hình &amp; backup</span>
+      </button>
+      <span class="hint">Phím tắt: <code>Ctrl + Shift + H</code></span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

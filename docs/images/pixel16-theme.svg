@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Pixel 16-bit theme artwork</title>
+  <desc id="desc">A retro computer in a starry pixel-art night scene, with abstract color shapes and no interface or text.</desc>
+  <rect width="960" height="540" fill="#080b18"/>
+  <path fill="#111a36" d="M0 0h960v340H0z"/>
+  <g fill="#e8f3ff" opacity=".8">
+    <path d="M104 68h12v12h-12zM212 128h8v8h-8zM770 70h12v12h-12zM850 164h8v8h-8zM684 208h8v8h-8zM326 74h8v8h-8z"/>
+    <path fill="#ffcf70" d="M145 184h8v8h-8zM818 112h8v8h-8zM580 93h8v8h-8z"/>
+  </g>
+  <path fill="#182b4c" d="M0 330h116v-24h52v24h80v-40h44v40h96v-28h56v28h92v-52h50v52h78v-30h60v30h76v-42h48v42h112v210H0z"/>
+  <path fill="#233b5c" d="M0 366h960v174H0z"/>
+  <path fill="#111827" d="M238 102h488v302H238z"/>
+  <path fill="#7aa8ce" d="M230 94h500v310H230z"/>
+  <path fill="#101829" d="M246 110h468v270H246z"/>
+  <path fill="#17243b" d="M264 128h432v234H264z"/>
+  <g shape-rendering="crispEdges">
+    <path fill="#17243b" d="M280 144h96v80h-96z"/>
+    <path fill="#0ec7d8" d="M296 176h16v16h-16zM328 160h16v16h-16zM344 192h16v16h-16zM312 208h16v16h-16z"/>
+    <path fill="#ffbd59" d="M400 152h64v16h-64zM416 168h32v16h-32zM480 184h48v16h-48zM544 152h80v16h-80z"/>
+    <path fill="#9d81ff" d="M400 224h32v16h-32zM448 208h80v16h-80zM544 224h48v16h-48zM608 208h32v16h-32z"/>
+    <path fill="#4de39b" d="M296 264h48v16h-48zM360 280h64v16h-64zM440 264h32v16h-32zM504 280h96v16h-96zM616 264h48v16h-48z"/>
+    <path fill="#ecf1ff" opacity=".9" d="M296 320h128v8H296zM440 320h64v8h-64zM520 320h144v8H520zM296 344h80v8h-80zM392 344h112v8H392z"/>
+  </g>
+  <path fill="#101827" d="M428 404h100v42H428z"/>
+  <path fill="#79a4c9" d="M382 444h192v16H382zM340 460h276v18H340z"/>
+  <path fill="#f4b860" opacity=".55" d="M292 484h376v8H292z"/>
+  <path fill="#080b18" d="M0 500h960v40H0z"/>
+  <path fill="#52d6db" opacity=".55" d="M48 516h160v4H48zM716 512h188v4H716zM292 508h376v4H292z"/>
+</svg>

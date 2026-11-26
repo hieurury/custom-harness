@@ -1,0 +1,147 @@
+/* ==========================================================================
+ * Rừng Nguyên Sinh (Primeval Forest) — OpenCode Harness theme
+ * Translucent forest palette on top of the live environment effect canvas.
+ * Variables provided by Harness:
+ *   --hx-bg --hx-fg --hx-accent --hx-px --hx-font-uiFont --hx-font-codeFont
+ * ======================================================================== */
+:root,
+:root[data-color-scheme='dark'],
+:root[data-color-scheme='light'] {
+  color-scheme: dark;
+
+  --hx-moss: #7ed957;
+  --hx-moss-dim: #4f8f43;
+  --hx-amber: #f5b942;
+  --hx-parchment: #f2ede4;
+  --hx-parchment-dim: #a4b8a8;
+  --hx-forest-deep: #08120d;
+  --hx-forest-mid: #0e1d15;
+  --hx-glass: rgba(10, 20, 15, 0.62);
+
+  --background-base: transparent !important;
+  --background-weak: rgba(14, 29, 21, 0.55) !important;
+  --background-strong: rgba(10, 20, 15, 0.72) !important;
+  --background-stronger: rgba(8, 16, 12, 0.82) !important;
+
+  --surface-base: rgba(20, 38, 28, 0.38) !important;
+  --surface-base-hover: rgba(30, 54, 40, 0.5) !important;
+  --surface-base-active: rgba(36, 64, 47, 0.6) !important;
+  --surface-raised-base: rgba(16, 32, 23, 0.55) !important;
+  --surface-raised-strong: rgba(20, 38, 28, 0.7) !important;
+  --surface-float-base: #0d1b14 !important;
+  --surface-weak: rgba(24, 46, 34, 0.42) !important;
+  --surface-strong: rgba(30, 56, 41, 0.62) !important;
+
+  --input-base: rgba(12, 26, 19, 0.72) !important;
+  --input-hover: rgba(18, 34, 25, 0.8) !important;
+  --input-active: rgba(16, 32, 23, 0.85) !important;
+  --input-focus: rgba(16, 32, 23, 0.85) !important;
+  --input-selected: rgba(126, 217, 87, 0.18) !important;
+  --input-disabled: rgba(20, 30, 24, 0.6) !important;
+
+  --text-base: var(--hx-parchment-dim) !important;
+  --text-weak: color-mix(in srgb, var(--hx-parchment-dim) 74%, transparent) !important;
+  --text-weaker: color-mix(in srgb, var(--hx-parchment-dim) 48%, transparent) !important;
+  --text-strong: var(--hx-parchment) !important;
+  --text-stronger: #ffffff !important;
+  --text-interactive-base: var(--hx-moss) !important;
+
+  --border-base: rgba(75, 120, 90, 0.34) !important;
+  --border-weak-base: rgba(75, 120, 90, 0.22) !important;
+  --border-weaker-base: rgba(75, 120, 90, 0.14) !important;
+  --border-strong-base: rgba(126, 217, 87, 0.42) !important;
+  --border-hover: rgba(126, 217, 87, 0.6) !important;
+  --border-selected: var(--hx-moss) !important;
+  --border-focus: var(--hx-moss) !important;
+
+  --icon-base: var(--hx-parchment-dim) !important;
+  --icon-strong-base: var(--hx-parchment) !important;
+  --icon-interactive-base: var(--hx-moss) !important;
+  --icon-on-brand-base: #08120d !important;
+
+  --button-primary-base: var(--hx-moss) !important;
+  --button-secondary-base: rgba(20, 38, 28, 0.72) !important;
+  --surface-brand-base: var(--hx-moss) !important;
+  --text-on-brand-base: #08120d !important;
+  --text-on-brand-strong: #08120d !important;
+
+  /* v2 tokens */
+  --v2-background-bg-base: transparent !important;
+  --v2-background-bg-deep: rgba(8, 16, 12, 0.55) !important;
+  --v2-background-bg-layer-01: rgba(12, 24, 18, 0.55) !important;
+  --v2-background-bg-layer-02: rgba(16, 32, 23, 0.62) !important;
+  --v2-background-bg-layer-03: rgba(20, 38, 28, 0.7) !important;
+  --v2-background-bg-accent: var(--hx-moss) !important;
+  --v2-text-text-base: var(--hx-parchment) !important;
+  --v2-text-text-muted: var(--hx-parchment-dim) !important;
+  --v2-text-text-faint: color-mix(in srgb, var(--hx-parchment-dim) 60%, transparent) !important;
+  --v2-text-text-accent: var(--hx-moss) !important;
+  --v2-border-border-base: rgba(75, 120, 90, 0.32) !important;
+  --v2-border-border-muted: rgba(75, 120, 90, 0.2) !important;
+  --v2-border-border-focus: var(--hx-moss) !important;
+  --v2-icon-icon-base: var(--hx-parchment-dim) !important;
+  --v2-icon-icon-muted: color-mix(in srgb, var(--hx-parchment-dim) 70%, transparent) !important;
+
+  --font-family-sans: var(--hx-font-uiFont), ui-sans-serif, system-ui, sans-serif !important;
+  --font-family-mono: var(--hx-font-codeFont), ui-monospace, monospace !important;
+  --v2-font-family-sans: var(--font-family-sans) !important;
+  --v2-font-family-code: var(--font-family-mono) !important;
+
+  --radius-xs: 2px !important;
+  --radius-sm: 3px !important;
+  --radius-md: 4px !important;
+  --radius-lg: 6px !important;
+  --radius-xl: 8px !important;
+
+  --syntax-string: #9adf8c !important;
+  --syntax-primitive: var(--hx-amber) !important;
+  --syntax-property: #b9e3c6 !important;
+  --syntax-type: #d8e8a8 !important;
+  --syntax-constant: #8fd8d0 !important;
+  --syntax-keyword: var(--hx-parchment-dim) !important;
+  --markdown-heading: var(--hx-amber) !important;
+  --markdown-link: var(--hx-moss) !important;
+  --markdown-code: #9adf8c !important;
+}
+
+html,
+body {
+  background-color: transparent !important;
+  color: var(--hx-parchment) !important;
+  font-family: var(--font-family-sans) !important;
+}
+
+/* Soft forest vignette behind every translucent panel. */
+html {
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(38, 70, 52, 0.35) 0%, rgba(8, 16, 12, 0.55) 55%, rgba(5, 10, 8, 0.75) 100%),
+    linear-gradient(180deg, #0a1710 0%, #08120d 100%) !important;
+  background-attachment: fixed !important;
+}
+
+body {
+  background: transparent !important;
+}
+
+code, pre, kbd, samp, .font-mono {
+  font-family: var(--font-family-mono) !important;
+}
+
+[data-slot='sidebar-header'],
+[data-slot='header'],
+[data-component='menu-v2-content'],
+[data-component='dialog-v2'],
+[data-slot='input-wrapper'] {
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+}
+
+::selection {
+  background: rgba(126, 217, 87, 0.35) !important;
+  color: #ffffff !important;
+}
+
+/* Thin moss scrollbars */
+* {
+  scrollbar-color: rgba(126, 217, 87, 0.4) transparent;
+}

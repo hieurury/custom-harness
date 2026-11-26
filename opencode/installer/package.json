@@ -1,0 +1,138 @@
+{
+  "name": "opencode-harness-installer",
+  "version": "1.0.0",
+  "description": "Installer for Custom Harness desktop integrations, themes, fonts, effects and companions",
+  "main": "main.js",
+  "author": "hieurury",
+  "homepage": "https://github.com/hieurury/custom-harness",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hieurury/custom-harness.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test ../tests/installer.test.js ../tests/updater.test.js",
+    "test:ui": "electron ../tests/ui-electron.js",
+    "sync:version": "node ../scripts/sync-version.js",
+    "build:linux": "npm run sync:version && electron-builder --linux deb AppImage --publish never",
+    "build:win": "npm run sync:version && electron-builder --config electron-builder.config.cjs --win nsis --publish never",
+    "build:all": "npm run sync:version && electron-builder --config electron-builder.config.cjs --linux deb AppImage --win nsis --publish never"
+  },
+  "devDependencies": {
+    "electron": "^45.5.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "ai.opencode.harness.installer",
+    "productName": "Custom Harness Installer",
+    "asar": false,
+    "artifactName": "Custom-Harness-Setup-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "catalog.js",
+      "updater.js",
+      "preload.js",
+      "renderer/**/*",
+      "assets/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../../antigravity/runtime",
+        "to": "antigravity/runtime",
+        "filter": [
+          "**/*",
+          "!**/*.bak",
+          "!**/.DS_Store",
+          "!**/Thumbs.db"
+        ]
+      },
+      {
+        "from": "../../antigravity/patcher",
+        "to": "antigravity/patcher",
+        "filter": [
+          "**/*",
+          "!**/*.bak",
+          "!**/.DS_Store",
+          "!**/Thumbs.db"
+        ]
+      },
+      {
+        "from": "../runtime",
+        "to": "runtime",
+        "filter": [
+          "**/*",
+          "!**/*.bak",
+          "!**/.DS_Store",
+          "!**/Thumbs.db"
+        ]
+      },
+      {
+        "from": "../patcher",
+        "to": "patcher",
+        "filter": [
+          "**/*",
+          "!**/*.bak",
+          "!**/.DS_Store",
+          "!**/Thumbs.db"
+        ]
+      },
+      {
+        "from": "../../licenses",
+        "to": "licenses",
+        "filter": ["**/*"]
+      }
+    ],
+    "linux": {
+      "target": [
+        "deb",
+        "AppImage"
+      ],
+      "category": "Utility",
+      "icon": "assets/icon.png",
+      "maintainer": "hieurury <noreply@example.com>",
+      "synopsis": "Tabbed Harness installer for OpenCode and Antigravity",
+      "description": "Installs, updates, and restores OpenCode or Antigravity Harness with independent theme, font, effects and pet options."
+    },
+    "deb": {
+      "depends": [
+        "libgtk-3-0t64 | libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0t64 | libatspi2.0-0",
+        "libuuid1"
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "runAfterFinish": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Custom Harness Installer",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico",
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}

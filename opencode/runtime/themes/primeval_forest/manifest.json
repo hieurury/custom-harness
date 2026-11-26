@@ -1,0 +1,123 @@
+{
+  "name": "Rừng Nguyên Sinh",
+  "description": "Không gian thiên nhiên xanh mát và yên bình, kết hợp khung cảnh rừng cây sống động cùng cảm giác thư thái khi làm việc.",
+  "version": "1.1.0",
+  "scope": "environment",
+  "thumbnail": "thumbnail.png",
+  "surfaces": [
+    {
+      "id": "forest_ground_bank",
+      "type": "ground",
+      "name": "Mặt đất Bờ Rừng Nguyên Sinh",
+      "description": "Mặt đất bờ rừng (bãi cỏ rêu đá phong hóa phía trên mặt nước)",
+      "dynamic": true,
+      "offsetFromBottom": 98
+    },
+    {
+      "id": "forest_water_surface",
+      "type": "water",
+      "name": "Mặt Nước Rừng Nguyên Sinh",
+      "description": "Mặt nước sông suối pixel tương tác lấp lánh",
+      "dynamic": true,
+      "offsetFromBottom": 64
+    }
+  ],
+  "entities": [
+    {
+      "id": "lightning_bolt",
+      "type": "hazard",
+      "name": "Tia Sét Giông Bão",
+      "spawnsOn": ["weather:storm"],
+      "hitbox": { "w": 12, "h": 120 },
+      "interactions": {
+        "pet": {
+          "hit": { "emit": "entity:hit_pet", "payload": { "animation": "dragged", "text": "Oái! Sét đánh trúng {pet} rồi, hoot!" } },
+          "near": { "emit": "entity:near_pet", "payload": { "radius": 120 } }
+        },
+        "ui_element": {
+          "hit": { "emit": "entity:hit_ui", "payload": { "effect": "shake", "duration": 400 } }
+        }
+      }
+    },
+    {
+      "id": "rain_drop",
+      "type": "passive",
+      "name": "Hạt Mưa Rừng",
+      "spawnsOn": ["weather:light_rain", "weather:storm"],
+      "interactions": {
+        "pet": {
+          "continuous": { "emit": "entity:rain_on_pet", "payload": { "effect": "wet" } }
+        }
+      }
+    }
+  ],
+  "weather": {
+    "states": ["clear", "light_rain", "storm"],
+    "default": "clear",
+    "autoTransition": true
+  },
+  "colors": {
+    "bg": "#0c1813",
+    "fg": "#f5f3e9",
+    "accent": "#4ade80",
+    "scheme": "dark"
+  },
+  "options": [
+    {
+      "id": "uiFont",
+      "type": "font",
+      "kind": "ui",
+      "group": "Font chữ",
+      "label": "Font giao diện",
+      "default": "jetbrains-mono",
+      "choices": ["jetbrains-mono", "vt323", "press-start-2p", "silkscreen", "system"]
+    },
+    {
+      "id": "codeFont",
+      "type": "font",
+      "kind": "code",
+      "group": "Font chữ",
+      "label": "Font code và terminal",
+      "default": "jetbrains-mono",
+      "choices": ["jetbrains-mono", "vt323", "system"]
+    },
+    {
+      "id": "effectLevel",
+      "type": "segmented",
+      "group": "Môi trường & Vật lý",
+      "label": "Mức độ hiệu ứng",
+      "default": "high",
+      "choices": [
+        { "value": "off", "label": "Tắt" },
+        { "value": "medium", "label": "Vừa" },
+        { "value": "high", "label": "Cao" }
+      ]
+    },
+    {
+      "id": "weather",
+      "type": "segmented",
+      "group": "Thời tiết & Môi trường",
+      "label": "Thời tiết",
+      "default": "auto",
+      "choices": [
+        { "value": "auto", "label": "Tự động" },
+        { "value": "clear", "label": "Trời trong xanh" },
+        { "value": "light_rain", "label": "Mưa nhẹ" },
+        { "value": "storm", "label": "Giông bão" }
+      ]
+    },
+    {
+      "id": "timeProgression",
+      "type": "segmented",
+      "group": "Thời gian & Ánh sáng",
+      "label": "Thời gian bầu trời",
+      "default": "realtime",
+      "choices": [
+        { "value": "realtime", "label": "Theo giờ thực tế" },
+        { "value": "day", "label": "Ban ngày" },
+        { "value": "sunset", "label": "Hoàng hôn" },
+        { "value": "night", "label": "Ban đêm" }
+      ]
+    }
+  ]
+}

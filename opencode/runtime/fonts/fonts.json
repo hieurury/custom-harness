@@ -1,0 +1,28 @@
+[
+  { "id": "jetbrains-mono", "name": "JetBrains Mono", "kind": "mono",
+    "files": [
+      { "file": "jetbrains-mono-latin-400.woff2", "weight": 400, "subset": "latin" },
+      { "file": "jetbrains-mono-latin-ext-400.woff2", "weight": 400, "subset": "latin-ext" },
+      { "file": "jetbrains-mono-vietnamese-400.woff2", "weight": 400, "subset": "vietnamese" },
+      { "file": "jetbrains-mono-latin-700.woff2", "weight": 700, "subset": "latin" },
+      { "file": "jetbrains-mono-vietnamese-700.woff2", "weight": 700, "subset": "vietnamese" }
+    ] },
+  { "id": "vt323", "name": "VT323", "kind": "pixel", "sizeAdjust": "125%",
+    "files": [
+      { "file": "vt323-latin-400.woff2", "weight": 400, "subset": "latin" },
+      { "file": "vt323-latin-ext-400.woff2", "weight": 400, "subset": "latin-ext" },
+      { "file": "vt323-vietnamese-400.woff2", "weight": 400, "subset": "vietnamese" }
+    ] },
+  { "id": "press-start-2p", "name": "Press Start 2P", "kind": "pixel", "sizeAdjust": "68%",
+    "files": [
+      { "file": "press-start-2p-latin-400.woff2", "weight": 400, "subset": "latin" },
+      { "file": "press-start-2p-latin-ext-400.woff2", "weight": 400, "subset": "latin-ext" }
+    ] },
+  { "id": "silkscreen", "name": "Silkscreen", "kind": "pixel", "sizeAdjust": "92%",
+    "files": [
+      { "file": "silkscreen-latin-400.woff2", "weight": 400, "subset": "latin" },
+      { "file": "silkscreen-latin-ext-400.woff2", "weight": 400, "subset": "latin-ext" },
+      { "file": "silkscreen-latin-700.woff2", "weight": 700, "subset": "latin" }
+    ] },
+  { "id": "system", "name": "Mặc định hệ thống", "kind": "system", "files": [] }
+]

@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# OpenCode Harness — Linux CLI installer wrapper.
+# Forwards all flags (e.g. --app-dir <path>, --dev) or an optional positional <app-dir>
+# to patcher/install-engine.js using Node.js or OpenCode's bundled Electron Node runtime.
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+ENGINE="$PROJECT_ROOT/patcher/install-engine.js"
+
+if command -v node >/dev/null 2>&1; then
+  exec node "$ENGINE" install "$@"
+fi
+
+for candidate in \
+  "/opt/OpenCode/ai.opencode" \
+  "/opt/opencode/ai.opencode" \
+  "$HOME/Applications/Opencode/ai.opencode" \
+  "$HOME/Applications/OpenCode/ai.opencode" \
+  "$(command -v ai.opencode 2>/dev/null || true)" \
+  "$(command -v opencode-desktop 2>/dev/null || true)"; do
+  if [[ -n "$candidate" && -x "$candidate" ]]; then
+    exec env ELECTRON_RUN_AS_NODE=1 "$candidate" "$ENGINE" install "$@"
+  fi
+done
+
+echo "ERROR: Node.js or OpenCode binary not found." >&2
+exit 1

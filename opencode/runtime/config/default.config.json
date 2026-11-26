@@ -1,0 +1,39 @@
+{
+  "activeTheme": "pixel16",
+  "debug": false,
+  "themes": {
+    "primeval_forest": {
+      "uiFont": "jetbrains-mono",
+      "codeFont": "jetbrains-mono",
+      "effectLevel": "high",
+      "weather": "auto",
+      "timeProgression": "realtime"
+    },
+    "pixel16": {
+      "pixelSize": 1,
+      "uiFont": "jetbrains-mono",
+      "palette": "cyan",
+      "background": "dots",
+      "animation": "low"
+    }
+  },
+  "pets": {
+    "enabled": true,
+    "activePets": [
+      "pixel_owl"
+    ],
+    "config": {
+      "pixel_owl": {
+        "scale": 2.5,
+        "mischiefRate": 0.3,
+        "nightOwlMode": true
+      }
+    },
+    "provider": "gemini",
+    "petName": "Hooty",
+    "petLabel": "Cú",
+    "userLabel": "Sen",
+    "customDialogues": {},
+    "browserMode": "floating"
+  }
+}

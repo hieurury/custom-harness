@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Primeval Forest theme artwork</title>
+  <desc id="desc">A quiet pixel-art forest, mossy trees, reflective stream, and perched owl with no application interface or text.</desc>
+  <rect width="960" height="540" fill="#101d25"/>
+  <path fill="#1e3940" d="M0 0h960v242H0z"/>
+  <path fill="#31544b" d="M0 72h142V32h98v58h132V38h132v42h106V20h130v70h111v72H0z"/>
+  <path fill="#487052" d="M0 126h100V92h120v44h146V84h132v46h132V94h112v42h116v74H0z"/>
+  <g shape-rendering="crispEdges">
+    <path fill="#243b35" d="M44 0h36v286H44zM200 24h30v270h-30zM714 0h42v296h-42zM866 12h36v280h-36z"/>
+    <path fill="#5a7960" d="M26 72h74v26H26zM184 112h68v24h-68zM692 84h82v28h-82zM846 130h72v24h-72z"/>
+    <path fill="#b9cf75" d="M72 116h10v10H72zM244 164h10v10h-10zM704 142h10v10h-10zM884 184h10v10h-10zM568 108h8v8h-8z"/>
+  </g>
+  <path fill="#172c2d" d="M0 284h960v256H0z"/>
+  <path fill="#345447" d="M0 326h190v-34h128v42h148v-28h156v36h142v-44h110v46h86v196H0z"/>
+  <path fill="#547354" d="M0 366h960v174H0z"/>
+  <path fill="#203d3b" d="M0 402h264v138H0zM710 392h250v148H710z"/>
+  <path fill="#32817a" d="M312 340h348l-54 200H350z"/>
+  <path fill="#63aaa0" opacity=".72" d="M362 370h252l-14 22H370zM348 420h248l-8 18H354zM372 476h202l-6 16H378z"/>
+  <path fill="#8bd1b1" opacity=".8" d="M408 394h82v8h-82zM520 448h58v8h-58zM392 500h76v8h-76z"/>
+  <g fill="#d6e99b">
+    <path d="M132 352h10v10h-10zM168 388h8v8h-8zM784 330h10v10h-10zM846 370h8v8h-8zM254 454h8v8h-8zM694 484h10v10h-10z"/>
+  </g>
+  <g shape-rendering="crispEdges">
+    <path fill="#382f29" d="M564 112h14v78h-14zM550 146h14v14h-14zM578 132h14v14h-14z"/>
+    <path fill="#c79254" d="M550 124h42v34h-42z"/>
+    <path fill="#f0c76c" d="M556 130h12v12h-12zM574 130h12v12h-12z"/>
+    <path fill="#182128" d="M560 134h6v6h-6zM576 134h6v6h-6z"/>
+    <path fill="#e4dfc5" d="M568 144h8v8h-8z"/>
+    <path fill="#9e7148" d="M546 158h48v10h-48z"/>
+  </g>
+  <path fill="#17292b" d="M0 520h960v20H0z"/>
+  <path fill="#86b986" d="M0 508h310v8H0zM662 512h298v8H662z"/>
+</svg>

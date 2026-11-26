@@ -1,0 +1,211 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout tagged source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.ref }}
+      - name: Validate release tag and version
+        shell: bash
+        run: |
+          version="$(node -p "require('./opencode/runtime/manifest.json').version")"
+          antigravity_version="$(node -p "require('./antigravity/runtime/manifest.json').version")"
+          test "$version" = "$antigravity_version" || {
+            echo "Runtime manifests must use the same release version" >&2
+            exit 1
+          }
+          test "$GITHUB_REF_NAME" = "v$version" || {
+            echo "Tag $GITHUB_REF_NAME does not match runtime version v$version" >&2
+            exit 1
+          }
+
+  linux:
+    needs: validate
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout tagged source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.ref }}
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: opencode/installer/package-lock.json
+      - name: Install dependencies
+        run: npm --prefix opencode/installer ci
+      - name: Test
+        run: |
+          npm --prefix opencode/installer test
+          xvfb-run -a npm --prefix opencode/installer run test:ui
+      - name: Build Linux packages
+        run: npm --prefix opencode/installer run build:linux
+      - name: Collect release files
+        run: |
+          mkdir release-assets
+          cp opencode/installer/dist/*.deb opencode/installer/dist/*.AppImage release-assets/
+      - name: Upload Linux assets
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-linux
+          path: release-assets/*
+          if-no-files-found: error
+          retention-days: 7
+
+  windows-unsigned:
+    if: contains(github.ref_name, '-')
+    needs: validate
+    runs-on: windows-2022
+    steps:
+      - name: Checkout tagged source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.ref }}
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: opencode/installer/package-lock.json
+      - name: Install dependencies
+        run: npm --prefix opencode/installer ci
+      - name: Build unsigned prerelease
+        env:
+          WINDOWS_SIGNING_MODE: unsigned
+        run: npm --prefix opencode/installer run build:win
+      - name: Collect release files
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path release-assets | Out-Null
+          Get-ChildItem opencode/installer/dist -Filter *.exe |
+            Where-Object { $_.Name -notmatch '__uninstaller' } |
+            Copy-Item -Destination release-assets
+      - name: Upload Windows assets
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-windows
+          path: release-assets/*
+          if-no-files-found: error
+          retention-days: 7
+
+  windows-signed:
+    if: ${{ !contains(github.ref_name, '-') }}
+    needs: validate
+    runs-on: windows-2022
+    environment: release-signing
+    env:
+      WINDOWS_SIGNING_MODE: ${{ vars.WINDOWS_SIGNING_MODE }}
+      WINDOWS_PUBLISHER_NAME: ${{ vars.WINDOWS_PUBLISHER_NAME }}
+      AZURE_SIGNING_ENDPOINT: ${{ vars.AZURE_SIGNING_ENDPOINT }}
+      AZURE_SIGNING_ACCOUNT: ${{ vars.AZURE_SIGNING_ACCOUNT }}
+      AZURE_SIGNING_PROFILE: ${{ vars.AZURE_SIGNING_PROFILE }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+      WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+    steps:
+      - name: Checkout tagged source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.ref }}
+      - name: Require a configured signing identity
+        shell: pwsh
+        run: |
+          if ($env:WINDOWS_SIGNING_MODE -notin @('azure', 'pfx')) {
+            throw 'Stable Windows releases require WINDOWS_SIGNING_MODE=azure or pfx in the release-signing environment.'
+          }
+          if ([string]::IsNullOrWhiteSpace($env:WINDOWS_PUBLISHER_NAME)) {
+            throw 'WINDOWS_PUBLISHER_NAME is required.'
+          }
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: opencode/installer/package-lock.json
+      - name: Install dependencies
+        run: npm --prefix opencode/installer ci
+      - name: Build signed Windows installer
+        run: npm --prefix opencode/installer run build:win
+      - name: Verify Authenticode publisher and timestamp
+        shell: pwsh
+        run: |
+          $expected = $env:WINDOWS_PUBLISHER_NAME
+          $files = @(
+            Get-ChildItem opencode/installer/dist -Filter *.exe | Where-Object { $_.Name -notmatch '__uninstaller' }
+            Get-ChildItem 'opencode/installer/dist/win-unpacked' -Filter '*.exe' -ErrorAction SilentlyContinue
+          )
+          if ($files.Count -eq 0) { throw 'No Windows executables were found to verify.' }
+          foreach ($file in $files) {
+            $signature = Get-AuthenticodeSignature $file.FullName
+            if ($signature.Status -ne 'Valid') { throw "Invalid Authenticode signature: $($file.Name) ($($signature.Status))" }
+            if (-not $signature.TimeStamperCertificate) { throw "Missing trusted timestamp: $($file.Name)" }
+            if ($signature.SignerCertificate.Subject -notlike "*$expected*") {
+              throw "Unexpected publisher on $($file.Name): $($signature.SignerCertificate.Subject)"
+            }
+          }
+      - name: Collect release files
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path release-assets | Out-Null
+          Get-ChildItem opencode/installer/dist -Filter *.exe |
+            Where-Object { $_.Name -notmatch '__uninstaller' } |
+            Copy-Item -Destination release-assets
+      - name: Upload Windows assets
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-windows
+          path: release-assets/*
+          if-no-files-found: error
+          retention-days: 7
+
+  draft-release:
+    needs: [validate, linux, windows-unsigned, windows-signed]
+    if: >-
+      always() && needs.validate.result == 'success' && needs.linux.result == 'success' &&
+      (needs.windows-unsigned.result == 'success' || needs.windows-unsigned.result == 'skipped') &&
+      (needs.windows-signed.result == 'success' || needs.windows-signed.result == 'skipped')
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Download Linux assets
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: release-linux
+          path: release-assets
+      - name: Download Windows assets
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: release-windows
+          path: release-assets
+      - name: Create checksums and release notes
+        shell: bash
+        run: |
+          cd release-assets
+          sha256sum * > SHA256SUMS.txt
+          cd ..
+          if [[ "$GITHUB_REF_NAME" == *-* ]]; then
+            printf 'Unsigned Windows prerelease. Review compatibility and checksums before publishing.\n\n' > release-notes.md
+          else
+            printf 'Windows Authenticode signature, publisher, and timestamp were verified by CI.\n\n' > release-notes.md
+          fi
+      - name: Create draft GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          args=("$GITHUB_REF_NAME" release-assets/* --draft --verify-tag --notes-file release-notes.md)
+          if [[ "$GITHUB_REF_NAME" == *-* ]]; then args+=(--prerelease); fi
+          gh release create "${args[@]}"
