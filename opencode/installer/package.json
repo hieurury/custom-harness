@@ -13,7 +13,7 @@
   "scripts": {
     "start": "electron .",
     "test": "node --test ../tests/installer.test.js ../tests/updater.test.js",
-    "test:ui": "electron ../tests/ui-electron.js",
+    "test:ui": "electron --no-sandbox ../tests/ui-electron.js",
     "sync:version": "node ../scripts/sync-version.js",
     "build:linux": "npm run sync:version && electron-builder --linux deb AppImage --publish never",
     "build:win": "npm run sync:version && electron-builder --config electron-builder.config.cjs --win nsis --publish never",
