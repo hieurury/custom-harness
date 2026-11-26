@@ -5,7 +5,11 @@ Notable project changes are recorded here. Versions use the format
 
 ## Unreleased
 
+## 1.0.0-rc.1
+
 - Add project documentation, CI checks, release automation, and GitHub update
   checking/downloading in the shared installer.
 - Refresh the installer Electron runtime and include font license notices in
   packaged builds.
+- Translate developer documentation and source comments into English while
+  keeping the product UI, theme labels, and companion dialogue in Vietnamese.

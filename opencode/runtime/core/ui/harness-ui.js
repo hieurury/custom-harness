@@ -333,7 +333,7 @@
       }
     }
 
-    // 4. Advanced Settings: 2 Tabs (Mặc định vs Tự động)
+    // 4. Advanced settings: two tabs (Manual and Automatic).
     const subTabNav = h('div', { class: 'hx-subtabs', 'data-hx-tour': 'pet-advanced' },
       h('button', {
         class: 'hx-subtab-btn' + (petSubTab === 'default' ? ' hx-subtab-on' : ''),
@@ -348,7 +348,7 @@
     const subTabContent = h('div', {});
 
     if (petSubTab === 'default') {
-      // Tab 1: Mặc định (Persona & Visual Dialogue Editor Modal)
+      // Tab 1: Manual settings (persona and visual dialogue editor).
       const petName = petsData.petName || 'Hooty';
       const petLabel = petsData.petLabel || 'Cú';
       const userLabel = petsData.userLabel || 'Sen';
@@ -470,7 +470,7 @@
         )
       );
 
-      // Dialogue Modal Panel (When user clicks 'Cấu hình câu thoại')
+      // Dialogue modal panel (opened from the dialogue configuration control).
       if (dialogueModalOpen) {
         const getDefaultTemplates = (catId) => (
           petsData.defaultDialogueTemplates && Array.isArray(petsData.defaultDialogueTemplates[catId])
@@ -682,7 +682,7 @@
 
     } else {
       flushPendingDialogues = null;
-      // Tab 2: Tự động (AI Cloud Brain - One Row Layout)
+      // Tab 2: Automatic settings (AI cloud brain, single-row layout).
       const currentProvider = petsData.provider || 'gemini';
       const hasKey = Boolean(petsData && petsData.hasApiKey);
 

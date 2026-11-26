@@ -1,6 +1,6 @@
 /* ==========================================================================
- * Rừng Nguyên Sinh (Primeval Forest) — Antigravity Theme
- * Trong suốt, tập trung vào thiên nhiên rừng nguyên sinh, tối giản border
+ * Primeval Forest — Antigravity theme.
+ * Transparent surfaces focused on the forest environment, with minimal borders.
  * ======================================================================== */
 
 :root {
@@ -67,7 +67,7 @@ body.theme-dark {
   --peek-shadow: none !important;
 }
 
-/* 2. Top-Level Shell & Conversation Workspace (Trút bỏ hoàn toàn khối che phủ) */
+/* 2. Top-level shell and conversation workspace (remove opaque overlays). */
 html,
 body,
 #root {
@@ -116,7 +116,7 @@ aside {
   box-shadow: none !important;
 }
 
-/* Xóa viền bao quanh từng nút/dòng trong sidebar */
+/* Remove borders around individual sidebar buttons and rows. */
 .bg-sidebar .agy-button,
 .bg-sidebar a,
 .bg-sidebar button,
@@ -136,7 +136,7 @@ aside {
   color: #ffffff !important;
 }
 
-/* Mục hội thoại đang chọn */
+/* Selected conversation item. */
 .bg-sidebar [class*="bg-accent"],
 .bg-sidebar [class*="bg-sidebar-accent"],
 .bg-sidebar [aria-selected="true"] {
@@ -156,7 +156,7 @@ header,
   box-shadow: none !important;
 }
 
-/* 6. Chat Composer / Prompt Input Box (Gọn gàng, hơi trong suốt, không viền kép dày) */
+/* 6. Chat composer and prompt input (compact, slightly transparent, no thick double border). */
 .surface-composer,
 #antigravity\.agentSidePanelInputBox,
 [id="antigravity.agentSidePanelInputBox"] {
@@ -180,8 +180,8 @@ header,
   box-shadow: none !important;
 }
 
-/* 7. Conversation Messages & Text (Thoáng đãng, nổi tự nhiên trên nền rừng) -- */
-/* User Input Step: Loại bỏ hoàn toàn nền và khung bao bên ngoài, chỉ giữ khung prompt bên trong */
+/* 7. Conversation messages and text (spacious and naturally legible over the forest). */
+/* User input step: remove the outer background and frame; keep only the inner prompt field. */
 [class*="group/user-input-step"] {
   background-color: transparent !important;
   background: transparent !important;
@@ -203,7 +203,7 @@ header,
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
 }
 
-/* Markdown typography in chat: Sắc nét, dễ đọc trên nền rừng */
+/* Markdown typography in chat: crisp and readable over the forest background. */
 [data-markdown-root] {
   color: var(--hx-parchment) !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
@@ -281,7 +281,7 @@ code:not(pre code) {
   color: #ffffff !important;
 }
 
-/* 9. Thành phần Harness: Tương phản rõ ràng với nền, dễ thao tác ------------ */
+/* 9. Harness components: maintain clear contrast and usability. */
 .hx-root .hx-modal {
   background: #122119 !important;
   border: 1px solid #4a7558 !important;

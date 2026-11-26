@@ -1,7 +1,7 @@
 {
   "id": "opencode-harness",
   "name": "OpenCode Harness",
-  "version": "1.0.0",
+  "version": "1.0.0-rc.1",
   "author": "hieurury",
   "schemaVersion": 1,
   "description": "Modular customization, themes, and interactive extensions for the OpenCode desktop app."

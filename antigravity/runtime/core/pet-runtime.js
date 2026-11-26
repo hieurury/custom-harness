@@ -3025,7 +3025,7 @@
       if (this.isWet && this.wetTimer > 0) {
         this.wetTimer--;
         if (this.wetTimer % 18 === 0 && env && typeof env.emitSplash === 'function' && this.state !== 'swim') {
-          // Nhỏ giọt nước khi vừa lên bờ
+          // Drip water when the pet has just come ashore.
           SensoryEngine.spawnParticle(this.x + this.width / 2, this.y + this.height - 4, 'water', 1);
         }
         if (this.wetTimer <= 0) this.isWet = false;
@@ -3195,7 +3195,7 @@
           }
 
           if (!isAquatic && this.manifest.physics?.canFly && this.swimTimer > 180) {
-            // Hooty vỗ cánh bay vọt lên khỏi mặt nước
+            // Hooty flaps its wings and launches out of the water.
             if (typeof swimEnv.emitSplash === 'function') {
               swimEnv.emitSplash(this.x + this.width / 2, 1.8);
             }
