@@ -11,9 +11,18 @@ binary. Keep the original license text in `licenses/` and add a mapping to
 
 The bundled font families have been traced to their upstream projects and are
 distributed under OFL-1.1. Their notices and license files are included in the
-installer. The existing icons, theme previews, and pet sprite assets still
-need source and redistribution-rights confirmation; do not assume their
-license from appearance alone.
+installer.
+
+The maintainer reports that the installer icons, UI logo/preview, theme
+thumbnails, and pixel-owl sprites/preview were created for this project using
+AI generation or captured from the maintainer's own product/development UI,
+and authorizes distribution bundled with Custom Harness. The exact AI service,
+model, prompts, and generation dates were not preserved, so this is an
+owner-reported provenance statement rather than independent verification. The
+two README screenshots are direct captures of blank OpenCode and Antigravity
+views and contain no chat or conversation history. Project artwork is not
+relicensed under the root source-code MIT license; see
+[`THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md).
 
 ## Content generated with an AI tool
 
@@ -30,9 +39,8 @@ this repository; they contain no application screenshot or user conversation.
 
 ## Project source and code license
 
-There is currently no root `LICENSE` covering the whole project. The installer
-package metadata declares MIT for that package, but that does not clearly
-license all runtime code, artwork, and other files. The repository owner must
-choose the intended project-wide license and scope before announcing a public
-source release. Third-party material keeps its own license regardless of that
-choice.
+The root [`LICENSE`](../LICENSE) applies the MIT License to project-authored
+source code. Fonts retain OFL-1.1. Project artwork has the bundled-use notice
+described above and is not relicensed under MIT. The maintainer is responsible
+for retaining any additional AI-service records or terms applicable to the
+generated artwork.

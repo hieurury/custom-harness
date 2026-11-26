@@ -44,22 +44,18 @@ Prerelease tags containing `-` may be unsigned and are marked prerelease. A
 stable tag requires valid Windows signing configuration and verified
 Authenticode publisher/timestamp information; otherwise the workflow fails.
 
-## Private repository and automatic updates
+## Release visibility and automatic updates
 
-Keeping the source repository private is compatible with private development
-and CI, but it affects distribution: GitHub release metadata/assets for a
-private repository are not anonymously readable. The installer currently
-checks GitHub Releases without asking the user to sign in, so it cannot fetch
-private release information or assets. Keep the repository private as
-requested; before end users can use the built-in update check, choose an
-authorized distribution method (for example, an authenticated release client
-or a separate public artifact host). Do not embed a maintainer token in the
-installer.
+The repository is public, so published GitHub Release metadata and assets can
+be read anonymously by the built-in updater. Draft releases are not visible to
+users until published. The updater verifies a downloaded asset against
+`SHA256SUMS.txt` and saves it for the user; it does not run the installer
+automatically.
 
-For a public release later, the update checker can use the public GitHub
-release endpoint without credentials. The updater verifies the downloaded
-asset against `SHA256SUMS.txt` and saves it for the user; it does not run the
-installer automatically.
+If the repository is made private, the updater cannot access its release
+metadata or assets without an authorized distribution method (for example, an
+authenticated release client or a separate public artifact host). Do not embed
+a maintainer token in the installer.
 
 ## Cost notes
 

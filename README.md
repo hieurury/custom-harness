@@ -6,8 +6,8 @@ companions. Modular integrations make room for additional tools over time; the
 installer lists the integrations supported by each build.
 
 <p align="center">
-  <img src="docs/images/pixel16-theme.svg" alt="Pixel 16-bit theme artwork: a retro monitor with abstract color patterns, no application or conversation UI" width="49%">
-  <img src="docs/images/primeval-forest-theme.svg" alt="Primeval Forest theme artwork: a quiet pixel-art forest stream and owl, no application or conversation UI" width="49%">
+  <img src="docs/images/opencode.png" alt="OpenCode window with Custom Harness's Primeval Forest theme and pixel owl on a blank session, with no chat history" width="49%">
+  <img src="docs/images/agy.png" alt="Antigravity window with Custom Harness and Hooty on its welcome screen, with no chat history" width="49%">
 </p>
 
 ## What you can customize
@@ -20,11 +20,11 @@ installer lists the integrations supported by each build.
 
 ## Install
 
-**Easiest:** when a release is available, download the installer for your
+**Easiest:** when a release is published, download the installer for your
 operating system from
 [Releases](https://github.com/hieurury/custom-harness/releases), run it, choose
-an available integration, and follow the on-screen steps. The repository is
-currently private, so access is limited to people invited to it.
+an available integration, and follow the on-screen steps. This repository is
+public, but draft releases are not available until published.
 
 **Terminal:** see the [installation guide](docs/installation.md) for Linux,
 Windows, and macOS instructions and prerequisites.
@@ -50,4 +50,6 @@ integration. The installer creates a backup and includes a restore option.
 See [installation](docs/installation.md),
 [configuration](docs/configuration.md), and
 [third-party notices](THIRD_PARTY_NOTICES.md) and
-[licensing guidance](docs/licensing.md).
+[licensing guidance](docs/licensing.md). Project-authored source code is
+licensed under the [MIT License](LICENSE); third-party assets retain their own
+terms.

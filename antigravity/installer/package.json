@@ -1,6 +1,6 @@
 {
   "name": "custom-harness-installer",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0-rc.3",
   "description": "One-click installer for Custom Harness — modular customization and extensions for Google Antigravity",
   "main": "main.js",
   "author": "hieurury",
@@ -58,6 +58,18 @@
         "filter": [
           "**/*"
         ]
+      },
+      {
+        "from": "../../LICENSE",
+        "to": "LICENSE"
+      },
+      {
+        "from": "../../THIRD_PARTY_NOTICES.md",
+        "to": "THIRD_PARTY_NOTICES.md"
+      },
+      {
+        "from": "../../docs/licensing.md",
+        "to": "docs/licensing.md"
       }
     ],
     "linux": {

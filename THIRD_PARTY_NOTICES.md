@@ -22,21 +22,29 @@ See [`licenses/fonts/NOTICE.md`](licenses/fonts/NOTICE.md) for the file mapping.
 
 ## Project artwork and other assets
 
-The illustrations in `docs/images/` are original vector artwork created for
-this project. They are decorative theme illustrations, not screenshots of an
-application or user content.
+The screenshots in `docs/images/opencode.png` and `docs/images/agy.png` were
+captured from the maintainer's OpenCode and Antigravity application windows
+with Custom Harness enabled. They show blank/welcome views and contain no chat
+messages or conversation history.
 
-The repository also contains application icons, theme previews, and pet
-sprites. Their original author/source and redistribution terms are not fully
-recorded in the existing project metadata. They are **not** covered by the
-font license; confirm and document each asset's provenance and permissions
-before distributing a public release. Do not infer a license from an asset
-being publicly accessible or AI-generated.
+The installer icons, UI logo and preview image, theme thumbnails, and pixel-owl
+sprites/preview are present under `antigravity/` and `opencode/`; matching
+copies have identical file contents. The maintainer reports that this artwork
+was created for the project using AI generation or captured from the
+maintainer's own product/development UI, and authorizes its distribution as
+part of Custom Harness. The exact AI service, model, prompts, and generation
+dates were not recorded in the repository; this notice records the
+maintainer's provenance statement and is not an independent verification.
 
-The project does not yet have a root `LICENSE` file defining the terms for the
-complete source tree and original artwork. Existing package metadata that says
-`MIT` is limited to that package and is not a substitute for a repository-wide
-license decision. See [licensing guidance](docs/licensing.md).
+These assets are **not** covered by the font license or the root source-code
+MIT license. This project notice permits their distribution bundled with
+Custom Harness; it does not grant a separate blanket license to extract or
+reuse the artwork. See [licensing guidance](docs/licensing.md).
+
+The root [`LICENSE`](LICENSE) applies the MIT License to project-authored
+source code. It does not relicense fonts or project artwork. Installer package
+metadata also declares MIT. See
+[licensing guidance](docs/licensing.md) for the scope.
 
 ## Other software
 

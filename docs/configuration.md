@@ -25,8 +25,7 @@ Use **Check for updates** to check again, then choose **Download update** to
 save the matching installer. Downloading does not silently replace or run the
 installed application; you decide when to run the downloaded installer.
 
-GitHub does not provide anonymous access to private-repository release assets.
-While this repository is private, update checking/downloading only works if the
-release endpoint is made available to the client through an authorized method.
-The current installer does not ask for a GitHub credential. See
-[releasing](releasing.md) for the distribution choices.
+This public repository's published GitHub Releases can be checked without a
+GitHub login. Draft releases are not available to the updater. If the
+repository is made private, anonymous update checks and downloads will stop
+working; see [releasing](releasing.md) before changing the distribution setup.

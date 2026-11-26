@@ -201,11 +201,28 @@ jobs:
           cd release-assets
           sha256sum * > SHA256SUMS.txt
           cd ..
-          if [[ "$GITHUB_REF_NAME" == *-* ]]; then
-            printf 'Unsigned Windows prerelease. Review compatibility and checksums before publishing.\n\n' > release-notes.md
-          else
-            printf 'Windows Authenticode signature, publisher, and timestamp were verified by CI.\n\n' > release-notes.md
-          fi
+          version="${GITHUB_REF_NAME#v}"
+          awk -v heading="## $version" '
+            $0 == heading { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+            END { if (!found) exit 1 }
+          ' CHANGELOG.md > release-highlights.md
+          test -s release-highlights.md || {
+            echo "Missing changelog entry for $version" >&2
+            exit 1
+          }
+          {
+            printf '# Custom Harness %s\n\n' "$version"
+            cat release-highlights.md
+            printf '\n## Windows installer\n\n'
+            if [[ "$GITHUB_REF_NAME" == *-* ]]; then
+              printf 'This prerelease Windows installer is unsigned. Windows may show an unknown-publisher warning.\n'
+            else
+              printf 'Windows Authenticode signature, publisher, and timestamp were verified by CI.\n'
+            fi
+            printf '\nSHA-256 checksums are provided in `SHA256SUMS.txt`.\n'
+          } > release-notes.md
       - name: Create draft GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
