@@ -5,7 +5,7 @@ Notable project changes are recorded here. Versions use the format
 
 ## Unreleased
 
-## 1.0.0-rc.1
+## 1.0.0-rc.2
 
 - Add project documentation, CI checks, release automation, and GitHub update
   checking/downloading in the shared installer.
@@ -13,3 +13,4 @@ Notable project changes are recorded here. Versions use the format
   packaged builds.
 - Translate developer documentation and source comments into English while
   keeping the product UI, theme labels, and companion dialogue in Vietnamese.
+- Fix the release job's repository context before creating the draft release.

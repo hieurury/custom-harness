@@ -181,6 +181,10 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout tagged source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.ref }}
       - name: Download Linux assets
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
@@ -206,6 +210,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          args=("$GITHUB_REF_NAME" release-assets/* --draft --verify-tag --notes-file release-notes.md)
+          args=("$GITHUB_REF_NAME" release-assets/* --draft --verify-tag --notes-file release-notes.md --repo "$GITHUB_REPOSITORY")
           if [[ "$GITHUB_REF_NAME" == *-* ]]; then args+=(--prerelease); fi
           gh release create "${args[@]}"
